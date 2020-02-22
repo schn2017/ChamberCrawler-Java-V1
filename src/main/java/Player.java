@@ -93,7 +93,7 @@ public class Player {
         for (int i = 0; i < 8; i++) {
             tileASCII = gameBoard.getBoardTile(this.playerPositionY + directions[i][0], this.playerPositionX + directions[i][1]);
             //System.out.println(tileASCII);
-            if (tileASCII == '.' || tileASCII == '+' || tileASCII == '#') {
+            if (tileASCII == '.' || tileASCII == '+' || tileASCII == '#' || tileASCII == 'G') {
                 this.validPlayerDirections[i] = true;
             } else {
                 this.validPlayerDirections[i] = false;
@@ -121,6 +121,15 @@ public class Player {
         this.playerLastAction = this.playerLastAction + " " + action;
     }
 
+    public int getPlayerGold(){
+        return this.playerGold;
+    }
+    
+    public void setPlayerGold(int gold){
+        System.out.println("ADding gold");
+        this.playerGold = this.playerGold + gold;
+    }
+    
     public void performAction(Board gameBoard) {
         int oldYPosition = this.playerPositionY;
         int oldXPosition = this.playerPositionX;

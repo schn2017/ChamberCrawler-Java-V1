@@ -21,6 +21,7 @@ public class Board {
     private int boardRoomNumbers;
     private ArrayList<Monster>[] boardMonsters;
     private ArrayList<Potion>[] boardPotions;
+    private ArrayList<Treasure>[] boardTreasures;
 
     public Board(int height, int width) {
         this.boardSizeX = width;
@@ -29,10 +30,12 @@ public class Board {
         this.boardRoomNumbers = 1;
         this.boardMonsters = new ArrayList[this.boardRoomNumbers];
         this.boardPotions = new ArrayList[this.boardRoomNumbers];
+        this.boardTreasures = new ArrayList[this.boardRoomNumbers];
 
         for (int i = 0; i < this.boardRoomNumbers; i++) {
             this.boardMonsters[i] = new ArrayList<Monster>();
             this.boardPotions[i] = new ArrayList<Potion>();
+            this.boardTreasures[i] = new ArrayList<Treasure>();
         }
     }
 
@@ -44,6 +47,11 @@ public class Board {
         this.boardPotions[roomNumber].add(potion);
     }
 
+    public void addTreasure(int roomNumber, Treasure treasure){
+        this.boardTreasures[roomNumber].add(treasure);
+    }
+    
+    
     public void initBoard() {
         for (int i = 0; i < this.boardSizeY; i++) {
             for (int j = 0; j < this.boardSizeX; j++) {
@@ -131,7 +139,7 @@ public class Board {
             int potionListSize = this.boardPotions[i].size();
             for (int j = 0; j < potionListSize; j++) {
 
-                // Check if monster is dead
+                // Check if potion is used
                 if (this.boardPotions[i].get(j).getIsUsed() == true) {
                     setBoardTile(this.boardPotions[i].get(j).getPotionPositionY(), this.boardPotions[i].get(j).getPotionPositionX(), '.');
                     this.boardPotions[i].remove(j);
@@ -139,7 +147,22 @@ public class Board {
             }
         }
     }
+    public void updateTreasures(Board gameBoard, Player player) {
+        int roomCount = this.boardRoomNumbers;
+        for (int i = 0; i < roomCount; i++) {
+            int treasureListSize = this.boardTreasures[i].size();
+            for (int j = 0; j < treasureListSize; j++) {
 
+                // Check if potion is used
+                if (this.boardTreasures[i].get(j).getIsUsed() == true) {
+                    setBoardTile(this.boardTreasures[i].get(j).getTreasurePositionY(), this.boardTreasures[i].get(j).getTreasurePositionX(), '.');
+                    this.boardTreasures[i].remove(j);
+                }else{
+                    this.boardTreasures[i].get(j).update(gameBoard, player);
+                }
+            }
+        }
+    }    
     public void updateMonsters(Board gameBoard, Player player) {
         int roomCount = this.boardRoomNumbers;
         for (int i = 0; i < roomCount; i++) {
