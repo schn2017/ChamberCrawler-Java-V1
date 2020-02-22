@@ -13,7 +13,6 @@ import java.util.Scanner;
 import java.nio.file.Paths;
 
 public class Board {
-
     private int boardSizeX;
     private int boardSizeY;
     private Tile[][] boardTiles;

@@ -121,15 +121,15 @@ public class Player {
         this.playerLastAction = this.playerLastAction + " " + action;
     }
 
-    public int getPlayerGold(){
+    public int getPlayerGold() {
         return this.playerGold;
     }
-    
-    public void setPlayerGold(int gold){
+
+    public void setPlayerGold(int gold) {
         System.out.println("ADding gold");
         this.playerGold = this.playerGold + gold;
     }
-    
+
     public void performAction(Board gameBoard) {
         int oldYPosition = this.playerPositionY;
         int oldXPosition = this.playerPositionX;
@@ -140,7 +140,11 @@ public class Player {
             System.out.print("Please enter a valid action: ");
             String playerAction = playerReader.nextLine();
             //System.out.println("Player action entered is " + playerAction);
-            if (playerAction.equals("no")) {
+            if (playerAction.equals("quit")) {
+                System.exit(0);
+            } else if (playerAction.equals("reset")) {
+                System.out.println("To do: Reset action");
+            } else if (playerAction.equals("no")) {
                 if (validPlayerDirections[0] == true) {
                     this.playerPositionY = this.playerPositionY - 1;
                     this.playerLastAction = "moved north.";
