@@ -29,6 +29,7 @@ public class Chamber_Crawler {
                 // Check if player decided to reset
                 
                 Board gameBoard = new Board(height, width);
+                MonsterFactory floorMonsterCreater = new MonsterFactory();
                 gameBoard.initBoard();
                 gameBoard.loadBoardFromFile();
                 player.spawnPlayer(gameBoard);

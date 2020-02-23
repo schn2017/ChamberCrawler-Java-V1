@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,15 +12,8 @@ public class Monster {
     private boolean[] validMonsterDirections;
     private boolean playerFound;
     private char monsterCharacter;
-    
 
     public Monster() {
-        this.monsterCharacter = 'V';
-        this.monsterPositionX = 10;
-        this.monsterPositionY = 5;
-        this.monsterHealth = 50;
-        this.monsterAttackPower = 25;
-        this.monsterDefensePower = 25;
         this.validMonsterDirections = new boolean[8];
         this.playerFound = false;
     }
@@ -35,6 +29,30 @@ public class Monster {
             player.setPlayerLastAction(monsterCharacter + " missed PC.");
         }
 
+    }
+
+    public void setMonsterHealth(int monsterHealth) {
+        this.monsterHealth = monsterHealth;
+    }
+
+    public void setMonsterAttackPower(int monsterAttackPower) {
+        this.monsterAttackPower = monsterAttackPower;
+    }
+
+    public void setMonsterDefensePower(int monsterDefensePower) {
+        this.monsterDefensePower = monsterDefensePower;
+    }
+
+    public void setMonsterCharacter(char monsterCharacter) {
+        this.monsterCharacter = monsterCharacter;
+    }
+
+    public void setMonsterPositionX(int monsterPostionX) {
+        this.monsterPositionX = monsterPositionX;
+    }
+
+    public void setMonsterPositionY(int monsterPostionY) {
+        this.monsterPositionY = monsterPositionY;
     }
 
     public int getMonsterPositionX() {
@@ -120,7 +138,7 @@ public class Monster {
     }
 
     public void takeDamage(int damage) {
-        double damageTaken = Math.ceil((100/(100 + (double)this.monsterDefensePower))) * (double)damage;
-        this.monsterHealth = this.monsterHealth - (int)damageTaken;
+        double damageTaken = Math.ceil((100 / (100 + (double) this.monsterDefensePower))) * (double) damage;
+        this.monsterHealth = this.monsterHealth - (int) damageTaken;
     }
 }
