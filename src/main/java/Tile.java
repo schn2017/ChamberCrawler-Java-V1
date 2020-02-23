@@ -1,45 +1,47 @@
+
 public class Tile {
+
     private int tilePositionX;
     private int tilePositionY;
     private char tileCharacter;
     private char originalCharacter;
     private boolean isOccupied;
-    
-    public Tile(int row, int col){
+
+    public Tile(int row, int col) {
         this.tilePositionX = col;
         this.tilePositionY = row;
         this.tileCharacter = '.';
     }
-    
-    public int getTilePositionY(){
+
+    public int getTilePositionY() {
         return this.tilePositionY;
     }
-    
-     public int getTilePositionX(){
+
+    public int getTilePositionX() {
         return this.tilePositionX;
-    }   
-    
-    public char getTileCharacter(){
+    }
+
+    public char getTileCharacter() {
         return this.tileCharacter;
     }
-    
-    public void setTileCharacter(char tileCharacter){
+
+    public void setTileCharacter(char tileCharacter) {
         this.tileCharacter = tileCharacter;
     }
-    
-    public void setOriginalCharacter(char tileCharacter){
+
+    public void setOriginalCharacter(char tileCharacter) {
         this.originalCharacter = tileCharacter;
     }
-    
-    public char getOriginalCharacter(){
+
+    public char getOriginalCharacter() {
         return this.originalCharacter;
     }
-    
-    public boolean getIsOccupied(){
+
+    public boolean getIsOccupied() {
         return this.isOccupied;
     }
-    
-    public void setIsOccupied(boolean status){
+
+    public void setIsOccupied(boolean status) {
         this.isOccupied = status;
     }
 }

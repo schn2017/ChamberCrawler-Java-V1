@@ -34,72 +34,6 @@ public class Monster {
 
     }
 
-    public void setMonsterHealth(int monsterHealth) {
-        this.monsterHealth = monsterHealth;
-    }
-
-    public void setMonsterAttackPower(int monsterAttackPower) {
-        this.monsterAttackPower = monsterAttackPower;
-    }
-
-    public void setMonsterDefensePower(int monsterDefensePower) {
-        this.monsterDefensePower = monsterDefensePower;
-    }
-
-    public void setMonsterCharacter(char monsterCharacter) {
-        this.monsterCharacter = monsterCharacter;
-    }
-
-    public void setMonsterPositionX(int monsterPostionX) {
-        this.monsterPositionX = monsterPositionX;
-    }
-
-    public void setMonsterPositionY(int monsterPostionY) {
-        this.monsterPositionY = monsterPositionY;
-    }
-    
-    public void setIsPeaceful(){
-        this.isPeaceful = true;
-    }
-
-    public int getMonsterPositionX() {
-        return this.monsterPositionX;
-    }
-
-    public int getMonsterPositionY() {
-        return this.monsterPositionY;
-    }
-
-    public char getMonsterCharacter() {
-        return this.monsterCharacter;
-    }
-
-    public int getMonsterHealth() {
-        return this.monsterHealth;
-    }
-
-    public void update(Board gameBoard, Player player) {
-        findValidDirections(gameBoard);
-
-        if (playerFound == true) {
-            attackPlayer(player);
-        } else {
-            moveMonster(gameBoard);
-        }
-    }
-
-    public void spawnMonster(Board gameBoard) {
-        int tileElement = gameBoard.getRandomSpawnTileElement();
-        ArrayList<Tile> spawnableTiles = gameBoard.getSpawnableTiles();
-
-        this.monsterPositionY = spawnableTiles.get(tileElement).getTilePositionY();
-        this.monsterPositionX = spawnableTiles.get(tileElement).getTilePositionX();
-
-        gameBoard.setBoardTile(this.monsterPositionY, this.monsterPositionX, this.monsterCharacter);
-        gameBoard.setBoardTileOccupied(this.monsterPositionY, this.monsterPositionX, true);
-        gameBoard.removeSpawnableTile(tileElement);
-    }
-
     public void findValidDirections(Board gameBoard) {
         //                       NO      NE        NW        E      SE      S        SW       W    
         int[][] directions = {{-1, 0}, {-1, 1}, {-1, -1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
@@ -122,6 +56,22 @@ public class Monster {
         if (found == false) {
             this.playerFound = false;
         }
+    }
+
+    public int getMonsterPositionX() {
+        return this.monsterPositionX;
+    }
+
+    public int getMonsterPositionY() {
+        return this.monsterPositionY;
+    }
+
+    public char getMonsterCharacter() {
+        return this.monsterCharacter;
+    }
+
+    public int getMonsterHealth() {
+        return this.monsterHealth;
     }
 
     public void moveMonster(Board gameBoard) {
@@ -152,8 +102,58 @@ public class Monster {
 
     }
 
+    public void setMonsterHealth(int monsterHealth) {
+        this.monsterHealth = monsterHealth;
+    }
+
+    public void setMonsterAttackPower(int monsterAttackPower) {
+        this.monsterAttackPower = monsterAttackPower;
+    }
+
+    public void setMonsterDefensePower(int monsterDefensePower) {
+        this.monsterDefensePower = monsterDefensePower;
+    }
+
+    public void setMonsterCharacter(char monsterCharacter) {
+        this.monsterCharacter = monsterCharacter;
+    }
+
+    public void setMonsterPositionX(int monsterPostionX) {
+        this.monsterPositionX = monsterPositionX;
+    }
+
+    public void setMonsterPositionY(int monsterPostionY) {
+        this.monsterPositionY = monsterPositionY;
+    }
+
+    public void setIsPeaceful() {
+        this.isPeaceful = true;
+    }
+
+    public void spawnMonster(Board gameBoard) {
+        int tileElement = gameBoard.getRandomSpawnTileElement();
+        ArrayList<Tile> spawnableTiles = gameBoard.getSpawnableTiles();
+
+        this.monsterPositionY = spawnableTiles.get(tileElement).getTilePositionY();
+        this.monsterPositionX = spawnableTiles.get(tileElement).getTilePositionX();
+
+        gameBoard.setBoardTile(this.monsterPositionY, this.monsterPositionX, this.monsterCharacter);
+        gameBoard.setBoardTileOccupied(this.monsterPositionY, this.monsterPositionX, true);
+        gameBoard.removeSpawnableTile(tileElement);
+    }
+
     public void takeDamage(int damage) {
         double damageTaken = Math.ceil((100 / (100 + (double) this.monsterDefensePower))) * (double) damage;
         this.monsterHealth = this.monsterHealth - (int) damageTaken;
+    }
+
+    public void update(Board gameBoard, Player player) {
+        findValidDirections(gameBoard);
+
+        if (playerFound == true) {
+            attackPlayer(player);
+        } else {
+            moveMonster(gameBoard);
+        }
     }
 }

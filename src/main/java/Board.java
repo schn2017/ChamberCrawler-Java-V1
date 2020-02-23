@@ -112,8 +112,8 @@ public class Board {
     public void findSpawnableTiles() {
         for (int row = 0; row < this.boardSizeY; row++) {
             for (int col = 0; col < this.boardSizeX; col++) {
-                if (this.boardTiles[row][col].getTileCharacter() == '.') {          
-                     this.spawnableTiles.add(this.boardTiles[row][col]);
+                if (this.boardTiles[row][col].getTileCharacter() == '.') {
+                    this.spawnableTiles.add(this.boardTiles[row][col]);
                 }
             }
         }

@@ -114,12 +114,12 @@ public class Player {
         return this.playerLastAction;
     }
 
-    public void setPlayerLastAction(String action) {
-        this.playerLastAction = this.playerLastAction + " " + action;
-    }
-
     public int getPlayerGold() {
         return this.playerGold;
+    }
+
+    public void setPlayerLastAction(String action) {
+        this.playerLastAction = this.playerLastAction + " " + action;
     }
 
     public void setPlayerGold(int gold) {
