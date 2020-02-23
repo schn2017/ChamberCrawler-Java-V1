@@ -12,6 +12,7 @@ public class Monster {
     private boolean[] validMonsterDirections;
     private boolean playerFound;
     private char monsterCharacter;
+    private boolean isPeaceful;
 
     public Monster() {
         this.validMonsterDirections = new boolean[8];
@@ -22,11 +23,13 @@ public class Monster {
         Random rand = new Random();
         int hitChance = rand.nextInt(100);
 
-        if (hitChance <= 50) {
-            player.takeDamage(this.monsterAttackPower);
-            player.setPlayerLastAction(monsterCharacter + " dealt " + this.monsterAttackPower + " damage to PC.");
-        } else {
-            player.setPlayerLastAction(monsterCharacter + " missed PC.");
+        if (this.isPeaceful == false) {
+            if (hitChance <= 50) {
+                player.takeDamage(this.monsterAttackPower);
+                player.setPlayerLastAction(monsterCharacter + " dealt " + this.monsterAttackPower + " damage to PC.");
+            } else {
+                player.setPlayerLastAction(monsterCharacter + " missed PC.");
+            }
         }
 
     }
@@ -53,6 +56,10 @@ public class Monster {
 
     public void setMonsterPositionY(int monsterPostionY) {
         this.monsterPositionY = monsterPositionY;
+    }
+    
+    public void setIsPeaceful(){
+        this.isPeaceful = true;
     }
 
     public int getMonsterPositionX() {
@@ -82,7 +89,15 @@ public class Monster {
     }
 
     public void spawnMonster(Board gameBoard) {
+        int tileElement = gameBoard.getRandomSpawnTileElement();
+        ArrayList<Tile> spawnableTiles = gameBoard.getSpawnableTiles();
+
+        this.monsterPositionY = spawnableTiles.get(tileElement).getTilePositionY();
+        this.monsterPositionX = spawnableTiles.get(tileElement).getTilePositionX();
+
         gameBoard.setBoardTile(this.monsterPositionY, this.monsterPositionX, this.monsterCharacter);
+        gameBoard.setBoardTileOccupied(this.monsterPositionY, this.monsterPositionX, true);
+        gameBoard.removeSpawnableTile(tileElement);
     }
 
     public void findValidDirections(Board gameBoard) {

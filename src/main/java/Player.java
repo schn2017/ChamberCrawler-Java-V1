@@ -8,7 +8,7 @@ public class Player {
     private int playerPositionY;
     private int playerHealth;
     private String playerRace;
-    private int playerCurrentRoom;
+    private int playerFloor;
     private int playerGold;
     private boolean[] validPlayerDirections;
     private char playerCharacter;
@@ -19,11 +19,8 @@ public class Player {
     public Player() {
         this.playerHealth = 140;
         this.playerCharacter = '@';
-        this.playerPositionX = 6;
-        this.playerPositionY = 4;
         this.playerGold = 0;
         this.playerRace = "Human";
-        this.playerCurrentRoom = 0;
         this.validPlayerDirections = new boolean[8];
         this.playerAttackPower = 20;
         this.playerDefensePower = 20;
@@ -35,7 +32,7 @@ public class Player {
 
     public void attackDirection(Board gameBoard, String playerAction) {
         String[] command = playerAction.split(" ");
-        ArrayList<Monster> monsters = gameBoard.getRoomMonsters(this.playerCurrentRoom);
+        ArrayList<Monster> monsters = gameBoard.getMonsters();
         int targetXPosition = 0;
         int targetYPosition = 0;
         char tileASCII = ' ';
@@ -292,7 +289,16 @@ public class Player {
     }
 
     public void spawnPlayer(Board gameBoard) {
+        int tileElement = gameBoard.getRandomSpawnTileElement();
+        ArrayList<Tile> spawnableTiles = gameBoard.getSpawnableTiles();
+
+        this.playerPositionY = spawnableTiles.get(tileElement).getTilePositionY();
+        this.playerPositionX = spawnableTiles.get(tileElement).getTilePositionX();
+
+        //setBoardTile(int row, int column
         gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, this.playerCharacter);
+        gameBoard.setBoardTileOccupied(this.playerPositionY, this.playerPositionX, true);
+        gameBoard.removeSpawnableTile(tileElement);
         this.playerLastAction = "spawned.";
     }
 
@@ -315,7 +321,7 @@ public class Player {
 
     public void usePotion(Board gameBoard, String playerAction) {
         String[] command = playerAction.split(" ");
-        ArrayList<Potion> potions = gameBoard.getRoomPotions(this.playerCurrentRoom);
+        ArrayList<Potion> potions = gameBoard.getPotions();
         int targetX = 0;
         int targetY = 0;
         char tileASCII = ' ';

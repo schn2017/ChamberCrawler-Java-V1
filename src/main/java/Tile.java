@@ -5,11 +5,19 @@ public class Tile {
     private char originalCharacter;
     private boolean isOccupied;
     
-    public Tile(int positionX, int positionY){
-        this.tilePositionX = positionX;
-        this.tilePositionY = positionY;
+    public Tile(int row, int col){
+        this.tilePositionX = col;
+        this.tilePositionY = row;
         this.tileCharacter = '.';
     }
+    
+    public int getTilePositionY(){
+        return this.tilePositionY;
+    }
+    
+     public int getTilePositionX(){
+        return this.tilePositionX;
+    }   
     
     public char getTileCharacter(){
         return this.tileCharacter;
