@@ -90,7 +90,7 @@ public class Player {
         for (int i = 0; i < 8; i++) {
             tileASCII = gameBoard.getBoardTile(this.playerPositionY + directions[i][0], this.playerPositionX + directions[i][1]);
             //System.out.println(tileASCII);
-            if (tileASCII == '.' || tileASCII == '+' || tileASCII == '#' || tileASCII == 'G') {
+            if (tileASCII == '.' || tileASCII == '+' || tileASCII == '#' || tileASCII == 'G' || tileASCII == '\\') {
                 this.validPlayerDirections[i] = true;
             } else {
                 this.validPlayerDirections[i] = false;

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.Paths;
 import java.util.Random;
+import java.util.Iterator;
 
 public class Board {
 
@@ -127,6 +128,66 @@ public class Board {
 
     public void removeSpawnableTile(int usedTile) {
         this.spawnableTiles.remove(usedTile);
+    }
+
+    public void findSpawnableStairTile(Player player) {
+        int playerX = player.getPlayerPositionX();
+        int playerY = player.getPlayerPositionY();
+
+        // Room 1 Dimensions: 3 <= y <= 6, 3 <= x <=28
+        // Room 2 Dimensions: 15 <= y <= 21, 3 <= x <= 24
+        // Room 3 Dimensions: 10 <= y <= 12, 27 <= x <= 38
+        // Room 4 Dimensions: 19 <= y <= 21, 37 <= x <= 75 | 16 <= y <= 18, 65 <= x <= 75
+        // Room 5 Dimensions: 3 <= y <= 6, 39 <= x <= 60 | 3 <= y <= 12, 60 <= x <= 75
+        if ((playerX <= 28 && playerX >= 3) && (playerY >= 3 && playerY <= 6)) { // Remove room 1 coordinates
+            for (int i = this.spawnableTiles.size()-1; i>= 0; i--) {
+                int spawnTileX = this.spawnableTiles.get(i).getTilePositionX();
+                int spawnTileY = this.spawnableTiles.get(i).getTilePositionY();
+                if ((spawnTileX <= 28 && spawnTileX >= 3) && (spawnTileY >= 3 && spawnTileY <= 6)) {
+                    this.spawnableTiles.remove(i);
+                }
+            }
+
+        } else if ((playerX <= 24 && playerX >= 3) && (playerY >= 15 && playerY <= 21)) { // Remove room 2 coordinates
+            for (int i = this.spawnableTiles.size()-1; i>= 0; i--) {
+                int spawnTileX = this.spawnableTiles.get(i).getTilePositionX();
+                int spawnTileY = this.spawnableTiles.get(i).getTilePositionY();
+                if ((spawnTileX <= 24 && spawnTileX >= 3) && (spawnTileY >= 15 && spawnTileY <= 21)) {
+                    this.spawnableTiles.remove(i);
+                }
+            }
+
+        } else if ((playerX <= 38 && playerX >= 27) && (playerY >= 10 && playerY <= 12)) { // Remove room 3 coordinates
+            for (int i = this.spawnableTiles.size()-1; i>= 0; i--) {
+                int spawnTileX = this.spawnableTiles.get(i).getTilePositionX();
+                int spawnTileY = this.spawnableTiles.get(i).getTilePositionY();
+                if ((spawnTileX <= 38 && spawnTileX >= 27) && (spawnTileY >= 10 && spawnTileY <= 12)) {
+                    this.spawnableTiles.remove(i);
+                }
+            }
+
+        } else if (((playerX <= 75 && playerX >= 37) && (playerY >= 19 && playerY <= 21))
+                || ((playerX <= 75 && playerX >= 65) && (playerY >= 16 && playerY <= 18))) { // Remove room 4 coordinates
+            for (int i = this.spawnableTiles.size()-1; i>= 0; i--) {
+                int spawnTileX = this.spawnableTiles.get(i).getTilePositionX();
+                int spawnTileY = this.spawnableTiles.get(i).getTilePositionY();
+                if (((spawnTileX <= 75 && spawnTileX >= 37) && (spawnTileY >= 19 && spawnTileY <= 21))
+                        || ((spawnTileX <= 75 && spawnTileX >= 65) && (spawnTileY >= 16 && spawnTileY <= 18))) {
+                    this.spawnableTiles.remove(i);
+                }
+            }
+        } else if (((playerX <= 60 && playerX >= 39) && (playerY >= 3 && playerY <= 6))
+                || ((playerX <= 75 && playerX >= 60) && (playerY >= 3 && playerY <= 12))) { // Remove room 5 coordinates
+            for (int i = this.spawnableTiles.size()-1; i>= 0; i--) {
+                int spawnTileX = this.spawnableTiles.get(i).getTilePositionX();
+                int spawnTileY = this.spawnableTiles.get(i).getTilePositionY();
+                if (((spawnTileX <= 60 && spawnTileX >= 39) && (spawnTileY >= 3 && spawnTileY <= 6))
+                        || ((spawnTileX <= 75 && spawnTileX >= 60) && (spawnTileY >= 3 && spawnTileY <= 12))) {
+                    this.spawnableTiles.remove(i);
+                }
+            }
+        }
+
     }
 
     public void updatePotions(Board gameBoard) {

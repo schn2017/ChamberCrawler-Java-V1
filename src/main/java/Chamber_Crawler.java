@@ -34,7 +34,11 @@ public class Chamber_Crawler {
                 gameBoard.loadBoardFromFile();
                 gameBoard.findSpawnableTiles();
                 player.spawnPlayer(gameBoard);
+                System.out.println(player.getPlayerPositionX() + " " + player.getPlayerPositionY());
                 floorMonsterCreator.createMonsters(gameBoard);
+                gameBoard.findSpawnableStairTile(player);
+                Stair stair = new Stair();
+                stair.spawnStair(gameBoard);
                 /*
                 gameBoard.addPotion(0, potion);
                 potion.spawnPotion(gameBoard);
@@ -45,6 +49,9 @@ public class Chamber_Crawler {
                 while (true) {
                     gameBoard.drawBoard();
                     player.update(gameBoard);
+                    if (stair.checkNextLevel(gameBoard) == true){
+                        break;
+                    }
                     //gameBoard.updatePotions(gameBoard);
                     //gameBoard.updateTreasures(gameBoard, player);
                     gameBoard.updateMonsters(gameBoard, player);
