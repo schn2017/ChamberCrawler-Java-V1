@@ -286,6 +286,8 @@ public class Player {
 
     public void printPlayerInformation() {
         System.out.println("Race: " + this.playerRace + "   " + "Health: " + this.playerHealth + "    " + "Gold: " + this.playerGold);
+        System.out.println("Attack: " + this.playerAttackPower);
+        System.out.println("Defensive: " + this.playerDefensePower);
         System.out.println("Last Round: PC " + this.playerLastAction);
     }
 

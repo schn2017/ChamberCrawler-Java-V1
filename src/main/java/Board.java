@@ -40,7 +40,6 @@ public class Board {
         this.boardTreasures[roomNumber].add(treasure);
     }
     
-    
     public void initBoard() {
         for (int i = 0; i < this.boardSizeY; i++) {
             for (int j = 0; j < this.boardSizeX; j++) {
