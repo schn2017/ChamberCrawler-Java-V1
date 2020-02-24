@@ -326,8 +326,8 @@ public class Player {
         if (this.playerHealth > 0) {
             performAction(gameBoard);
         } else {
-            gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, '.');
-            System.out.println("You have died...");
+            Loss loss = new Loss();
+            loss.displayLoss(this.playerGold);
         }
     }
 

@@ -18,9 +18,6 @@ public class Chamber_Crawler {
             // Player Race Selection and Player creation
             Player player = new Player();
 
-            //Monster vampire = new Monster();
-            //Potion potion = new Potion();
-            //Treasure treasure = new Treasure();
             // Create Floor Loop
             while (true) {
 
@@ -50,6 +47,12 @@ public class Chamber_Crawler {
                 gameBoard.addTreasure(0, treasure);
                 treasure.spawnTreasure(gameBoard);*/
                 floor++;
+                
+                 if (floor == 9){
+                    Victory victory = new Victory();
+                    victory.displayVictory(player);
+                }
+                 
                 //Active Floor Loop
                 while (true) {
                     gameBoard.drawBoard();
