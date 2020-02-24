@@ -17,24 +17,29 @@ public class Chamber_Crawler {
 
             // Player Race Selection and Player creation
             Player player = new Player();
-            
-            
+
             //Monster vampire = new Monster();
             //Potion potion = new Potion();
             //Treasure treasure = new Treasure();
-
             // Create Floor Loop
             while (true) {
-                
-                // Check if player decided to reset
-                
+
+                // Setup Floor
                 Board gameBoard = new Board(height, width);
-                MonsterFactory floorMonsterCreator = new MonsterFactory();
                 gameBoard.initBoard();
                 gameBoard.loadBoardFromFile();
                 gameBoard.findSpawnableTiles();
-                player.spawnPlayer(gameBoard);
-                System.out.println(player.getPlayerPositionX() + " " + player.getPlayerPositionY());
+
+                // Set up Player
+                player.setPlayerFloor(floor);
+                if (floor == 0) {
+                    player.spawnPlayer(gameBoard);
+                } else {
+                    player.spawnPlayerNextLevel(gameBoard);
+                }
+
+                MonsterFactory floorMonsterCreator = new MonsterFactory();
+
                 floorMonsterCreator.createMonsters(gameBoard);
                 gameBoard.findSpawnableStairTile(player);
                 Stair stair = new Stair();
@@ -49,7 +54,7 @@ public class Chamber_Crawler {
                 while (true) {
                     gameBoard.drawBoard();
                     player.update(gameBoard);
-                    if (stair.checkNextLevel(gameBoard) == true){
+                    if (stair.checkNextLevel(gameBoard) == true) {
                         break;
                     }
                     //gameBoard.updatePotions(gameBoard);

@@ -29,7 +29,6 @@ public class Menu {
             System.out.print("Enter a valid integer option: ");
             int selectedOption = Integer.valueOf(scanner.nextLine());
             if (selectedOption == 1) {
-                System.out.println("Starting game");
                 break;
             } else if (selectedOption == 2) {
                 displayHelp();

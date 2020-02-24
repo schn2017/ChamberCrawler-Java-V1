@@ -127,6 +127,10 @@ public class Player {
         this.playerGold = this.playerGold + gold;
     }
 
+    public void setPlayerFloor(int floor) {
+        this.playerFloor = floor + 1;
+    }
+
     public void performAction(Board gameBoard) {
         int oldYPosition = this.playerPositionY;
         int oldXPosition = this.playerPositionX;
@@ -282,6 +286,7 @@ public class Player {
     }
 
     public void printPlayerInformation() {
+        System.out.println("Floor: " + this.playerFloor);
         System.out.println("Race: " + this.playerRace + "   " + "Health: " + this.playerHealth + "    " + "Gold: " + this.playerGold);
         System.out.println("Attack: " + this.playerAttackPower);
         System.out.println("Defensive: " + this.playerDefensePower);
@@ -299,7 +304,14 @@ public class Player {
         gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, this.playerCharacter);
         gameBoard.setBoardTileOccupied(this.playerPositionY, this.playerPositionX, true);
         gameBoard.removeSpawnableTile(tileElement);
-        this.playerLastAction = "spawned.";
+        this.playerLastAction = "spawned";
+    }
+
+    public void spawnPlayerNextLevel(Board gameBoard) {
+        gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, this.playerCharacter);
+        gameBoard.setBoardTileOccupied(this.playerPositionY, this.playerPositionX, true);
+        this.playerLastAction = "descended to floor " + this.playerFloor + ".";
+
     }
 
     public void takeDamage(int damage) {
