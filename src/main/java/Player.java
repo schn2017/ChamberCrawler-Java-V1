@@ -15,6 +15,7 @@ public class Player {
     private String playerLastAction;
     private int playerAttackPower;
     private int playerDefensePower;
+    private boolean playerReset;
 
     public Player() {
         this.playerHealth = 140;
@@ -113,6 +114,10 @@ public class Player {
     public String getPlayerLastAction() {
         return this.playerLastAction;
     }
+    
+    public boolean getPlayerReset(){
+        return this.playerReset;
+    }
 
     public int getPlayerGold() {
         return this.playerGold;
@@ -123,7 +128,6 @@ public class Player {
     }
 
     public void setPlayerGold(int gold) {
-        System.out.println("ADding gold");
         this.playerGold = this.playerGold + gold;
     }
 
@@ -144,7 +148,8 @@ public class Player {
             if (playerAction.equals("quit")) {
                 System.exit(0);
             } else if (playerAction.equals("reset")) {
-                System.out.println("To do: Reset action");
+                this.playerReset = true;
+                looper = 0;
             } else if (playerAction.equals("no")) {
                 if (validPlayerDirections[0] == true) {
                     this.playerPositionY = this.playerPositionY - 1;

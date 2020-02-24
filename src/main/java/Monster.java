@@ -9,6 +9,7 @@ public class Monster {
     private int monsterHealth;
     private int monsterAttackPower;
     private int monsterDefensePower;
+    private int monsterGold;
     private boolean[] validMonsterDirections;
     private boolean playerFound;
     private char monsterCharacter;
@@ -74,6 +75,10 @@ public class Monster {
         return this.monsterHealth;
     }
 
+    public int getMonsterGold() {
+        return this.monsterGold;
+    }
+
     public void moveMonster(Board gameBoard) {
         //                       NO      NE        NW        E      SE      S        SW       W            
         int[][] directions = {{-1, 0}, {-1, 1}, {-1, -1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
@@ -116,6 +121,10 @@ public class Monster {
 
     public void setMonsterCharacter(char monsterCharacter) {
         this.monsterCharacter = monsterCharacter;
+    }
+
+    public void setMonsterGold(int monsterGold) {
+        this.monsterGold = monsterGold;
     }
 
     public void setMonsterPositionX(int monsterPostionX) {

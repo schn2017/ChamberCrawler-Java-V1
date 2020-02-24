@@ -222,6 +222,7 @@ public class Board {
             // Check if monster is dead
             if (this.boardMonsters.get(i).getMonsterHealth() <= 0) {
                 setBoardTile(this.boardMonsters.get(i).getMonsterPositionY(), this.boardMonsters.get(i).getMonsterPositionX(), '.');
+                player.setPlayerGold(this.boardMonsters.get(i).getMonsterGold());
                 System.out.println("Removing monster");
                 this.boardMonsters.remove(i);
             } else { // Monster is alive

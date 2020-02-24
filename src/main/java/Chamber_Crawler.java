@@ -20,6 +20,10 @@ public class Chamber_Crawler {
 
             // Create Floor Loop
             while (true) {
+                if (player.getPlayerReset() == true) {
+                    floor = 0;
+                    break;
+                }
 
                 // Setup Floor
                 Board gameBoard = new Board(height, width);
@@ -46,17 +50,21 @@ public class Chamber_Crawler {
                 potion.spawnPotion(gameBoard);
                 gameBoard.addTreasure(0, treasure);
                 treasure.spawnTreasure(gameBoard);*/
-                floor++;
-                
-                 if (floor == 9){
+
+                if (floor == 9) {
                     Victory victory = new Victory();
                     victory.displayVictory(player);
                 }
-                 
+
                 //Active Floor Loop
                 while (true) {
                     gameBoard.drawBoard();
                     player.update(gameBoard);
+
+                    if (player.getPlayerReset() == true) {
+                        break;
+                    }
+
                     if (stair.checkNextLevel(gameBoard) == true) {
                         break;
                     }
@@ -64,6 +72,7 @@ public class Chamber_Crawler {
                     //gameBoard.updateTreasures(gameBoard, player);
                     gameBoard.updateMonsters(gameBoard, player);
                 }
+                floor++;
             }
         }
     }
