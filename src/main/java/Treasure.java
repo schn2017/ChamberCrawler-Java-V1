@@ -3,7 +3,7 @@ public class Treasure {
     private int treasurePositionX;
     private int treasurePositionY;
     private char treasureCharacter;
-    private int treasureValue;
+    private double treasureValue;
     private boolean isUsed;
 
     public Treasure() {

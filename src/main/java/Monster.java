@@ -9,7 +9,7 @@ public class Monster {
     private int monsterHealth;
     private int monsterAttackPower;
     private int monsterDefensePower;
-    private int monsterGold;
+    private double monsterGold;
     private boolean[] validMonsterDirections;
     private boolean playerFound;
     private char monsterCharacter;
@@ -75,7 +75,7 @@ public class Monster {
         return this.monsterHealth;
     }
 
-    public int getMonsterGold() {
+    public double getMonsterGold() {
         return this.monsterGold;
     }
 
@@ -123,7 +123,7 @@ public class Monster {
         this.monsterCharacter = monsterCharacter;
     }
 
-    public void setMonsterGold(int monsterGold) {
+    public void setMonsterGold(double monsterGold) {
         this.monsterGold = monsterGold;
     }
 

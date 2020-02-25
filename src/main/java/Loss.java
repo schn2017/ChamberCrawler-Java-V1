@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Loss {
 
-    public void displayLoss(int playerGold) {
+    public void displayLoss(double playerGold) {
         int rowCount = 0;
         try ( Scanner scanner = new Scanner(Paths.get("lossScreen.txt"))) {
             while (scanner.hasNextLine()) {

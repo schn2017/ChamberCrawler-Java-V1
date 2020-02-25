@@ -9,7 +9,9 @@ public class Player {
     private int playerHealth;
     private String playerRace;
     private int playerFloor;
-    private int playerGold;
+    private double playerGoldModifier;
+    private double playerGold;
+    private int playerPotionModifier;
     private boolean[] validPlayerDirections;
     private char playerCharacter;
     private String playerLastAction;
@@ -18,17 +20,7 @@ public class Player {
     private boolean playerReset;
 
     public Player() {
-        this.playerHealth = 140;
-        this.playerCharacter = '@';
-        this.playerGold = 0;
-        this.playerRace = "Human";
-        this.validPlayerDirections = new boolean[8];
-        this.playerAttackPower = 20;
-        this.playerDefensePower = 20;
-
-        for (int i = 0; i < 8; i++) {
-            this.validPlayerDirections[i] = false;
-        }
+        createPlayer();
     }
 
     public void attackDirection(Board gameBoard, String playerAction) {
@@ -84,6 +76,67 @@ public class Player {
         }
     }
 
+    public void createPlayer() {
+        int optionSelected;
+        Scanner playerScanner = new Scanner(System.in);
+
+        System.out.println("Please select a race from the options below:");
+        System.out.println("1. Human");
+        System.out.println("2. Dwarf");
+        System.out.println("3. Elf");
+        System.out.println("4. Orc");
+        System.out.println("Please enter the integer of the race you wish to play.");
+
+        while (true) {
+            optionSelected = Integer.valueOf(playerScanner.nextLine());
+
+            if (optionSelected <= 4 && optionSelected >= 1) {
+                break;
+            } else {
+                System.out.println("Please enter the integer of the race you wish to play.");
+            }
+        }
+
+        if (optionSelected == 1) {// Human
+            this.playerRace = "Human";
+            this.playerHealth = 140;
+            this.playerAttackPower = 20;
+            this.playerDefensePower = 20;
+            this.playerGoldModifier = 1;
+            this.playerPotionModifier = 1;
+
+        } else if (optionSelected == 2) {// Dwarf
+            this.playerRace = "Dwarf";
+            this.playerHealth = 100;
+            this.playerAttackPower = 20;
+            this.playerDefensePower = 30;
+            this.playerGoldModifier = 2;
+            this.playerPotionModifier = 1;
+        } else if (optionSelected == 3) {// Elf
+            this.playerRace = "Elf";
+            this.playerHealth = 140;
+            this.playerAttackPower = 30;
+            this.playerDefensePower = 10;
+            this.playerGoldModifier = 1;
+            this.playerPotionModifier = -1;
+            //negative potions have positive effect
+        } else if (optionSelected == 4) {// Orc
+            this.playerRace = "Orc";
+            this.playerHealth = 180;
+            this.playerAttackPower = 30;
+            this.playerDefensePower = 25;
+            this.playerGoldModifier = 0.5;
+            this.playerPotionModifier = 1;
+        }
+
+        this.playerCharacter = '@';
+        this.playerGold = 0;
+        this.validPlayerDirections = new boolean[8];
+        for (int i = 0; i < 8; i++) {
+            this.validPlayerDirections[i] = false;
+        }
+    }
+
     public void findValidDirections(Board gameBoard) {
         //                       NO      NE        NW        E      SE      S        SW       W    
         int[][] directions = {{-1, 0}, {-1, 1}, {-1, -1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
@@ -114,12 +167,12 @@ public class Player {
     public String getPlayerLastAction() {
         return this.playerLastAction;
     }
-    
-    public boolean getPlayerReset(){
+
+    public boolean getPlayerReset() {
         return this.playerReset;
     }
 
-    public int getPlayerGold() {
+    public double getPlayerGold() {
         return this.playerGold;
     }
 
@@ -127,7 +180,7 @@ public class Player {
         this.playerLastAction = this.playerLastAction + " " + action;
     }
 
-    public void setPlayerGold(int gold) {
+    public void setPlayerGold(double gold) {
         this.playerGold = this.playerGold + gold;
     }
 
