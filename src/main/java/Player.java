@@ -144,8 +144,22 @@ public class Player {
         for (int i = 0; i < 8; i++) {
             tileASCII = gameBoard.getBoardTile(this.playerPositionY + directions[i][0], this.playerPositionX + directions[i][1]);
             //System.out.println(tileASCII);
-            if (tileASCII == '.' || tileASCII == '+' || tileASCII == '#' || tileASCII == 'G' || tileASCII == '\\') {
+            if (tileASCII == '.' || tileASCII == '+' || tileASCII == '#' || tileASCII == '\\') {
                 this.validPlayerDirections[i] = true;
+            } else if (tileASCII == 'G') {
+                ArrayList<Treasure> treasures = gameBoard.getTreasures();
+
+                for (Treasure treasure : treasures) {
+                    if (treasure.getTreasurePositionY() == this.playerPositionY + directions[i][0]
+                            && treasure.getTreasurePositionX() == this.playerPositionX + directions[i][1]) {
+                        if (treasure.getValidDirection() == true) {
+                            this.validPlayerDirections[i] = true;
+                            break;
+                        } else {
+                            this.validPlayerDirections[i] = false;
+                        }
+                    }
+                }
             } else {
                 this.validPlayerDirections[i] = false;
             }
@@ -354,7 +368,7 @@ public class Player {
     }
 
     public void resetPlayerStats() {
-        
+
         if (this.playerRace.equals("Human")) {// Human
             this.playerAttackPower = 20;
             this.playerDefensePower = 20;

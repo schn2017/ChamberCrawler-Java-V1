@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.Paths;
 import java.util.Random;
-import java.util.Iterator;
 
 public class Board {
 
@@ -104,6 +103,10 @@ public class Board {
 
     public ArrayList<Potion> getPotions() {
         return this.boardPotions;
+    }
+
+    public ArrayList<Treasure> getTreasures() {
+        return this.boardTreasures;
     }
 
     public ArrayList<Tile> getSpawnableTiles() {

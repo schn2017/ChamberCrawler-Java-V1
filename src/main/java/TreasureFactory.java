@@ -17,7 +17,7 @@ public class TreasureFactory {
                 treasure.setValidDirection(true);
 
             } else if (treasurePick <= 8) { // Small horde of treasure
-                treasure.setTreasureValue(1);
+                treasure.setTreasureValue(2);
                 treasure.setValidDirection(true);
             } else { // Dragon treasure horde
                 treasure.setTreasureValue(6);
