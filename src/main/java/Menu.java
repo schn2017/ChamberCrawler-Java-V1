@@ -27,15 +27,20 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Enter a valid integer option: ");
-            int selectedOption = Integer.valueOf(scanner.nextLine());
-            if (selectedOption == 1) {
-                break;
-            } else if (selectedOption == 2) {
-                displayHelp();
-            } else if (selectedOption == 3) {
-                System.exit(0);
-            } else {
-                System.out.println("Please enter a valid integer as an option.");
+
+            try {
+                int selectedOption = Integer.valueOf(scanner.nextLine());
+                if (selectedOption == 1) {
+                    break;
+                } else if (selectedOption == 2) {
+                    displayHelp();
+                } else if (selectedOption == 3) {
+                    System.exit(0);
+                } else {
+                    System.out.print("Please enter a valid integer as an option.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid option!");
             }
         }
 
