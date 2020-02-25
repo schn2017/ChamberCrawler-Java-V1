@@ -85,15 +85,18 @@ public class Player {
         System.out.println("2. Dwarf");
         System.out.println("3. Elf");
         System.out.println("4. Orc");
-        System.out.println("Please enter the integer of the race you wish to play.");
 
         while (true) {
-            optionSelected = Integer.valueOf(playerScanner.nextLine());
-
-            if (optionSelected <= 4 && optionSelected >= 1) {
-                break;
-            } else {
-                System.out.println("Please enter the integer of the race you wish to play.");
+            System.out.println("Please enter the integer of the race you wish to play.");
+            try {
+                optionSelected = Integer.valueOf(playerScanner.nextLine());
+                if (optionSelected <= 4 && optionSelected >= 1) {
+                    break;
+                } else {
+                    System.out.println("Please enter the integer of the race you wish to play.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid option entered!");
             }
         }
 

@@ -20,9 +20,16 @@ public class Chamber_Crawler {
 
             // Create Floor Loop
             while (true) {
+                // If Player chose to reset game break loop
                 if (player.getPlayerReset() == true) {
                     floor = 0;
                     break;
+                }
+
+                // check for Victory condition
+                if (floor == 9) {
+                    Victory victory = new Victory();
+                    victory.displayVictory(player);
                 }
 
                 // Setup Floor
@@ -39,27 +46,20 @@ public class Chamber_Crawler {
                     player.spawnPlayerNextLevel(gameBoard);
                 }
 
+                // Setup Monsters, Potions, and Treasures
                 MonsterFactory floorMonsterCreator = new MonsterFactory();
-
-                //floorMonsterCreator.createMonsters(gameBoard);
-                
                 TreasureFactory floorTreasureCreator = new TreasureFactory();
-                
+
+                // Spawn Monsters, Potions, and Treasures
+                floorMonsterCreator.createMonsters(gameBoard);
                 floorTreasureCreator.createTreasures(gameBoard);
-                
+
+                // Set up stairs
                 gameBoard.findSpawnableStairTile(player);
                 Stair stair = new Stair();
+                
+                // Spawn stairs
                 stair.spawnStair(gameBoard);
-                /*
-                gameBoard.addPotion(0, potion);
-                potion.spawnPotion(gameBoard);
-                gameBoard.addTreasure(0, treasure);
-                treasure.spawnTreasure(gameBoard);*/
-
-                if (floor == 9) {
-                    Victory victory = new Victory();
-                    victory.displayVictory(player);
-                }
 
                 //Active Floor Loop
                 while (true) {
@@ -75,7 +75,7 @@ public class Chamber_Crawler {
                     }
                     //gameBoard.updatePotions(gameBoard);
                     gameBoard.updateTreasures(gameBoard, player);
-                    //gameBoard.updateMonsters(gameBoard, player);
+                    gameBoard.updateMonsters(gameBoard, player);
                 }
                 floor++;
                 player.resetPlayerStats();

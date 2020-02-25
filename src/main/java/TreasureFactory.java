@@ -8,7 +8,7 @@ public class TreasureFactory {
     public void createTreasures(Board gameBoard) {
         Random rand = new Random();
 
-        while (treasuresCreated < 50) {
+        while (treasuresCreated < 10) {
             Treasure treasure = new Treasure();
             int treasurePick = rand.nextInt(8);
 

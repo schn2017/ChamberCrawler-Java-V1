@@ -40,7 +40,7 @@ public class Menu {
                     System.out.print("Please enter a valid integer as an option.");
                 }
             } catch (Exception e) {
-                System.out.println("Invalid option!");
+                System.out.println("Invalid option entered!");
             }
         }
 
