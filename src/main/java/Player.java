@@ -181,7 +181,9 @@ public class Player {
     }
 
     public void setPlayerGold(double gold) {
+        System.out.println(gold);
         this.playerGold = this.playerGold + gold;
+        System.out.println(this.playerGold);
     }
 
     public void setPlayerFloor(int floor) {
@@ -349,6 +351,24 @@ public class Player {
         System.out.println("Attack: " + this.playerAttackPower);
         System.out.println("Defensive: " + this.playerDefensePower);
         System.out.println("Last Round: PC " + this.playerLastAction);
+    }
+
+    public void resetPlayerStats() {
+        
+        if (this.playerRace.equals("Human")) {// Human
+            this.playerAttackPower = 20;
+            this.playerDefensePower = 20;
+        } else if (this.playerRace.equals("Dwarf")) {// Dwarf
+            this.playerAttackPower = 20;
+            this.playerDefensePower = 30;
+        } else if (this.playerRace.equals("Elf")) {// Elf
+            this.playerAttackPower = 30;
+            this.playerDefensePower = 10;
+            //negative potions have positive effect
+        } else if (this.playerRace.equals("Orc")) {// Orc
+            this.playerAttackPower = 30;
+            this.playerDefensePower = 25;
+        }
     }
 
     public void spawnPlayer(Board gameBoard) {

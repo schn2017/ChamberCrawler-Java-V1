@@ -41,7 +41,12 @@ public class Chamber_Crawler {
 
                 MonsterFactory floorMonsterCreator = new MonsterFactory();
 
-                floorMonsterCreator.createMonsters(gameBoard);
+                //floorMonsterCreator.createMonsters(gameBoard);
+                
+                TreasureFactory floorTreasureCreator = new TreasureFactory();
+                
+                floorTreasureCreator.createTreasures(gameBoard);
+                
                 gameBoard.findSpawnableStairTile(player);
                 Stair stair = new Stair();
                 stair.spawnStair(gameBoard);
@@ -69,10 +74,11 @@ public class Chamber_Crawler {
                         break;
                     }
                     //gameBoard.updatePotions(gameBoard);
-                    //gameBoard.updateTreasures(gameBoard, player);
-                    gameBoard.updateMonsters(gameBoard, player);
+                    gameBoard.updateTreasures(gameBoard, player);
+                    //gameBoard.updateMonsters(gameBoard, player);
                 }
                 floor++;
+                player.resetPlayerStats();
             }
         }
     }
