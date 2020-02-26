@@ -7,6 +7,7 @@ public class Player {
     private int playerPositionX;
     private int playerPositionY;
     private int playerHealth;
+    private int playerMaxHealth;
     private String playerRace;
     private int playerFloor;
     private double playerGoldModifier;
@@ -103,6 +104,7 @@ public class Player {
         if (optionSelected == 1) {// Human
             this.playerRace = "Human";
             this.playerHealth = 140;
+            this.playerMaxHealth = 140;
             this.playerAttackPower = 20;
             this.playerDefensePower = 20;
             this.playerGoldModifier = 1;
@@ -111,6 +113,7 @@ public class Player {
         } else if (optionSelected == 2) {// Dwarf
             this.playerRace = "Dwarf";
             this.playerHealth = 100;
+            this.playerMaxHealth = 100;
             this.playerAttackPower = 20;
             this.playerDefensePower = 30;
             this.playerGoldModifier = 2;
@@ -118,6 +121,7 @@ public class Player {
         } else if (optionSelected == 3) {// Elf
             this.playerRace = "Elf";
             this.playerHealth = 140;
+            this.playerMaxHealth = 140;
             this.playerAttackPower = 30;
             this.playerDefensePower = 10;
             this.playerGoldModifier = 1;
@@ -126,6 +130,7 @@ public class Player {
         } else if (optionSelected == 4) {// Orc
             this.playerRace = "Orc";
             this.playerHealth = 180;
+            this.playerMaxHealth = 180;
             this.playerAttackPower = 30;
             this.playerDefensePower = 25;
             this.playerGoldModifier = 0.5;
@@ -205,6 +210,60 @@ public class Player {
 
     public void setPlayerFloor(int floor) {
         this.playerFloor = floor + 1;
+    }
+
+    public void setPlayerHealth(int health) {
+
+        if (health > 0) {
+            if (this.playerHealth + health >= this.playerMaxHealth) {
+                this.playerHealth = this.playerMaxHealth;
+            } else {
+                this.playerHealth = this.playerHealth + health;
+            }
+        } else {
+            if (this.playerRace.equals("Elf")) {
+                if (this.playerHealth + (health * -1) >= this.playerMaxHealth) {
+                    this.playerHealth = this.playerMaxHealth;
+                } else {
+                    this.playerHealth = this.playerHealth + (health * -1);
+                }
+
+            } else if (this.playerHealth + health <= 0) {
+                this.playerHealth = 0;
+            } else {
+                this.playerHealth = this.playerHealth + health;
+            }
+        }
+    }
+
+    public void setPlayerAttackPower(int potionModifier) {
+
+        if (potionModifier > 0) {
+            this.playerAttackPower = this.playerAttackPower + potionModifier;
+        } else {
+            if (this.playerRace.equals("Elf")) {
+                this.playerAttackPower = this.playerAttackPower + (potionModifier * -1);
+            } else if (this.playerAttackPower + potionModifier < 0) {
+                this.playerAttackPower = 0;
+            } else {
+                this.playerAttackPower = this.playerAttackPower + potionModifier;
+            }
+        }
+    }
+
+    public void setPlayerDefensePower(int potionModifier) {
+
+        if (potionModifier > 0) {
+            this.playerDefensePower = this.playerDefensePower + potionModifier;
+        } else {
+            if (this.playerRace.equals("Elf")) {
+                this.playerDefensePower = this.playerDefensePower + (potionModifier * -1);
+            } else if (this.playerDefensePower + potionModifier < 0) {
+                this.playerDefensePower = 0;
+            } else {
+                this.playerDefensePower = this.playerDefensePower + potionModifier;
+            }
+        }
     }
 
     public void performAction(Board gameBoard) {
@@ -468,7 +527,6 @@ public class Player {
                 }
 
                 tileASCII = gameBoard.getBoardTile(targetY, targetX);
-                System.out.println(tileASCII);
                 if (tileASCII != 'P') {
                     this.playerLastAction = "used nothing.";
                 } else {
@@ -479,6 +537,7 @@ public class Player {
                         if (posX == targetX && posY == targetY) {
 
                             potions.get(i).setIsUsed();
+
                             this.playerLastAction = "used the mysterious potion";
                         }
                     }

@@ -21,38 +21,47 @@ public class Potion {
 
         this.potionPositionY = spawnableTiles.get(tileElement).getTilePositionY();
         this.potionPositionX = spawnableTiles.get(tileElement).getTilePositionX();
-        
+
         gameBoard.setBoardTile(this.potionPositionY, this.potionPositionX, this.potionCharacter);
         gameBoard.setBoardTileOccupied(this.potionPositionY, this.potionPositionX, false);
         gameBoard.removeSpawnableTile(tileElement);
     }
-    
-    public boolean getIsUsed(){
+
+    public boolean getIsUsed() {
         return this.isUsed;
     }
-    
-    public void setIsUsed(){
+
+    public void setIsUsed() {
         this.isUsed = true;
     }
-    
-    public String getPotionType()
-    {
+
+    public String getPotionType() {
         return this.potionType;
     }
-    
-    public void setPotionType(String potionType){
-        this.potionType = potionType;     
+
+    public void applyPotionEffect(Player player) {
+        if (this.potionType.equals("Health")) {
+            player.setPlayerHealth(this.potionModifier);
+        } else if (this.potionType.equals("Attack")) {
+            player.setPlayerAttackPower(this.potionModifier);
+        } else if (this.potionType.equals("Defense")) {
+            player.setPlayerDefensePower(this.potionModifier);
+        }
     }
-    
-    public void setModifier(int potionModifier){
+
+    public void setPotionType(String potionType) {
+        this.potionType = potionType;
+    }
+
+    public void setModifier(int potionModifier) {
         this.potionModifier = potionModifier;
     }
-    
-    public int getPotionPositionX(){
+
+    public int getPotionPositionX() {
         return this.potionPositionX;
     }
-    
-    public int getPotionPositionY(){
+
+    public int getPotionPositionY() {
         return this.potionPositionY;
     }
 }

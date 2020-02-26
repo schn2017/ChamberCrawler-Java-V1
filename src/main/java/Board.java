@@ -193,11 +193,12 @@ public class Board {
 
     }
 
-    public void updatePotions(Board gameBoard) {
+    public void updatePotions(Board gameBoard, Player player) {
         int potionListSize = this.boardPotions.size();
-        for (int i = 0; i < potionListSize; i++) {
+        for (int i = 0; i < potionListSize - 1; i++) {
             // Check if potion is used
             if (this.boardPotions.get(i).getIsUsed() == true) {
+                this.boardPotions.get(i).applyPotionEffect(player);
                 setBoardTile(this.boardPotions.get(i).getPotionPositionY(), this.boardPotions.get(i).getPotionPositionX(), '.');
                 this.boardPotions.remove(i);
             }
