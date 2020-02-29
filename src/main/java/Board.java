@@ -224,6 +224,10 @@ public class Board {
 
             // Check if monster is dead
             if (monster.getMonsterHealth() <= 0) {
+                if(monster.getMonsterCharacter() == 'D'){
+                    monster.update(gameBoard, player);
+                }
+                
                 deadMonsters.add(monster);
             } else { // Monster is alive'
                 if (monster.getMonsterCharacter() == 'M') {

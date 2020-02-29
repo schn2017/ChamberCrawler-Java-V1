@@ -65,18 +65,14 @@ public class Player {
         } else if (tileASCII == 'P') {
             this.playerLastAction = "missed the potion.";
         } else {
-            for (int i = 0; i < monsters.size() - 1; i++) {
-                int posX = monsters.get(i).getMonsterPositionX();
-                int posY = monsters.get(i).getMonsterPositionY();
-
-                if (posX == targetXPosition && posY == targetYPosition) {
-                    monsters.get(i).takeDamage(this.playerAttackPower);
-
-                    if (monsters.get(i).getMonsterCharacter() == 'M') {
+            for (Monster monster : gameBoard.getMonsters()) {
+                if (monster.getMonsterPositionY() == targetYPosition && monster.getMonsterPositionX() == targetXPosition) {
+                    if (monster.getMonsterCharacter() == 'M') {
                         this.merchantsFriendly = false;
                     }
 
-                    this.playerLastAction = ("dealt " + this.playerAttackPower + " damage to " + monsters.get(i).getMonsterCharacter() + " (" + monsters.get(i).getMonsterHealth() + ").");
+                    monster.takeDamage(this.playerAttackPower);
+                    this.playerLastAction = ("dealt " + this.playerAttackPower + " damage to " + monster.getMonsterCharacter() + " (" + monster.getMonsterHealth() + ").");
                     break;
                 }
             }
@@ -218,9 +214,9 @@ public class Player {
     }
 
     public void setPlayerGold(double gold) {
-        System.out.println(gold);
+        //System.out.println(gold);
         this.playerGold = this.playerGold + gold;
-        System.out.println(this.playerGold);
+        //System.out.println(this.playerGold);
     }
 
     public void setPlayerFloor(int floor) {

@@ -79,6 +79,10 @@ public class Monster {
     public double getMonsterGold() {
         return this.monsterGold;
     }
+    
+    public boolean getPlayerFound(){
+        return this.playerFound;
+    }
 
     public void moveMonster(Board gameBoard) {
         //                       NO      NE        NW        E      SE      S        SW       W            
@@ -132,12 +136,13 @@ public class Monster {
         this.monsterGold = monsterGold;
     }
 
-    public void setMonsterPositionX(int monsterPostionX) {
-        this.monsterPositionX = monsterPositionX;
+    public void setMonsterPositionX(int positionX) {
+        this.monsterPositionX = positionX;
     }
 
-    public void setMonsterPositionY(int monsterPostionY) {
-        this.monsterPositionY = monsterPositionY;
+    public void setMonsterPositionY(int positionY) {
+        System.out.println(positionY);
+        this.monsterPositionY = positionY;
     }
 
     public void setIsPeaceful(boolean status) {
@@ -154,6 +159,13 @@ public class Monster {
         gameBoard.setBoardTile(this.monsterPositionY, this.monsterPositionX, this.monsterCharacter);
         gameBoard.setBoardTileOccupied(this.monsterPositionY, this.monsterPositionX, true);
         gameBoard.removeSpawnableTile(tileElement);
+    }
+    
+    public void spawnMonster(Board gameBoard, int positionY, int positionX){
+        this.monsterPositionY = positionY;
+        this.monsterPositionX = positionX;
+        gameBoard.setBoardTile(this.monsterPositionY, this.monsterPositionX, this.monsterCharacter);
+        gameBoard.setBoardTileOccupied(this.monsterPositionY, this.monsterPositionX, true);        
     }
 
     public void takeDamage(int damage) {
