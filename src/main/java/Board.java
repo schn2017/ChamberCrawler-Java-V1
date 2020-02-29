@@ -194,57 +194,58 @@ public class Board {
     }
 
     public void updatePotions(Board gameBoard, Player player) {
-        int potionListSize = this.boardPotions.size();
-        for (int i = 0; i < potionListSize - 1; i++) {
-            // Check if potion is used
-            if (this.boardPotions.get(i).getIsUsed() == true) {
-                this.boardPotions.get(i).applyPotionEffect(player);
-                setBoardTile(this.boardPotions.get(i).getPotionPositionY(), this.boardPotions.get(i).getPotionPositionX(), '.');
-                this.boardPotions.remove(i);
+        for (Potion potion : this.boardPotions) {
+            if (potion.getIsUsed() == true) {
+                System.out.println("Potion is used");
+
+                setBoardTile(potion.getPotionPositionY(), potion.getPotionPositionX(), '.');
+                this.boardPotions.remove(potion);
+                break;
             }
         }
     }
 
     public void updateTreasures(Board gameBoard, Player player) {
-        int treasureListSize = this.boardTreasures.size();
-        for (int i = 0; i < treasureListSize - 1; i++) {
-            // Check if gold is used
-            if (this.boardTreasures.get(i).getIsUsed() == true) {
-                this.boardTreasures.remove(i);
+        ArrayList<Treasure> usedTreasures = new ArrayList<>();
+
+        for (Treasure treasure : this.boardTreasures) {
+            if (treasure.getIsUsed() == true) {
+                usedTreasures.add(treasure);
             }
+        }
+        for (Treasure treasure : usedTreasures) {
+            this.boardTreasures.remove(treasure);
         }
     }
 
     public void updateMonsters(Board gameBoard, Player player) {
-        int monsterListSize = this.boardMonsters.size();
-        for (int i = 0; i < monsterListSize - 1; i++) {
+        ArrayList<Monster> deadMonsters = new ArrayList<>();
+        for (Monster monster : this.boardMonsters) {
 
             // Check if monster is dead
-            if (this.boardMonsters.get(i).getMonsterHealth() <= 0) {
-                setBoardTile(this.boardMonsters.get(i).getMonsterPositionY(), this.boardMonsters.get(i).getMonsterPositionX(), '.');
-                player.setPlayerGold(this.boardMonsters.get(i).getMonsterGold());
-
-                // If merchant died spawn gold hoard
-                if (this.boardMonsters.get(i).getMonsterCharacter() == 'M') {
-                    this.boardTreasures.add(new Treasure(this.boardMonsters.get(i).getMonsterPositionX(), this.boardMonsters.get(i).getMonsterPositionY(), 4, true));
-                    setBoardTile(this.boardMonsters.get(i).getMonsterPositionY(), this.boardMonsters.get(i).getMonsterPositionX(), 'G');
-                    player.setMerchantsFriendly(false);
-                    this.boardMonsters.remove(i);
-                    updateMonsters(gameBoard, player);
-                } else {
-                    this.boardMonsters.remove(i);
-                }
-
-            } else { // Monster is alive
-                if (this.boardMonsters.get(i).getMonsterCharacter() == 'M')
-                {
-                    if(player.getMerchantsFriendly() == false){
-                        this.boardMonsters.get(i).setIsPeaceful(false);
+            if (monster.getMonsterHealth() <= 0) {
+                deadMonsters.add(monster);
+            } else { // Monster is alive'
+                if (monster.getMonsterCharacter() == 'M') {
+                    if (player.getMerchantsFriendly() == false) {
+                        monster.setIsPeaceful(false);
                     }
                 }
-                
-                this.boardMonsters.get(i).update(gameBoard, player);
+                monster.update(gameBoard, player);
             }
         }
+
+        for (Monster monster : deadMonsters) {
+            setBoardTile(monster.getMonsterPositionY(), monster.getMonsterPositionX(), '.');
+            player.setPlayerGold(monster.getMonsterGold());
+
+            // If merchant died spawn gold hoard
+            if (monster.getMonsterCharacter() == 'M') {
+                this.boardTreasures.add(new Treasure(monster.getMonsterPositionX(), monster.getMonsterPositionY(), 4, true));
+                setBoardTile(monster.getMonsterPositionY(), monster.getMonsterPositionX(), 'G');
+            }
+            this.boardMonsters.remove(monster);
+        }
+
     }
 }

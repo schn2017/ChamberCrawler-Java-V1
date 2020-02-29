@@ -71,11 +71,11 @@ public class Player {
 
                 if (posX == targetXPosition && posY == targetYPosition) {
                     monsters.get(i).takeDamage(this.playerAttackPower);
-                    
-                    if(monsters.get(i).getMonsterCharacter() == 'M'){
+
+                    if (monsters.get(i).getMonsterCharacter() == 'M') {
                         this.merchantsFriendly = false;
                     }
-                    
+
                     this.playerLastAction = ("dealt " + this.playerAttackPower + " damage to " + monsters.get(i).getMonsterCharacter() + " (" + monsters.get(i).getMonsterHealth() + ").");
                     break;
                 }
@@ -204,13 +204,13 @@ public class Player {
     public double getPlayerGold() {
         return this.playerGold;
     }
-    
-    public boolean getMerchantsFriendly(){
+
+    public boolean getMerchantsFriendly() {
         return this.merchantsFriendly;
     }
-    
-    public void setMerchantsFriendly(boolean status){
-        this.merchantsFriendly= status;
+
+    public void setMerchantsFriendly(boolean status) {
+        this.merchantsFriendly = status;
     }
 
     public void setPlayerLastAction(String action) {
@@ -374,26 +374,30 @@ public class Player {
                 attackDirection(gameBoard, playerAction);
                 looper = 1;
             } else if (playerAction.charAt(0) == 'u') {
-                usePotion(gameBoard, playerAction);
-                looper = 2;
+                String[] command = playerAction.split(" ");
+
+                if (command.length > 1) {
+                    usePotion(gameBoard, playerAction);
+                    looper = 2;
+                }
+
             } else {
                 looper = -1;
                 System.out.println("Player action entered is " + playerAction);
             }
             if (looper == 0) {
                 if (oldYPosition != this.playerPositionY || oldXPosition != this.playerPositionX) {
-                    
-                    if (gameBoard.getBoardTile(this.playerPositionY, this.playerPositionX) == 'G'){
+
+                    if (gameBoard.getBoardTile(this.playerPositionY, this.playerPositionX) == 'G') {
                         ArrayList<Treasure> treasures = gameBoard.getTreasures();
-                        for (Treasure treasure:treasures){
-                            if(treasure.getTreasurePositionY() == this.playerPositionY &&treasure.getTreasurePositionX() == this.playerPositionX ){
+                        for (Treasure treasure : treasures) {
+                            if (treasure.getTreasurePositionY() == this.playerPositionY && treasure.getTreasurePositionX() == this.playerPositionX) {
                                 treasure.addTreasureToPlayer(this);
                                 System.out.println("Added treasure!");
                             }
                         }
                     }
-                    
-                    
+
                     gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, this.playerCharacter);
                     gameBoard.setBoardTileOccupied(this.playerPositionY, this.playerPositionX, true);
 
@@ -498,9 +502,7 @@ public class Player {
     public void takeDamage(int damage) {
         double damageTaken = Math.ceil((100 / (100 + (double) this.playerDefensePower))) * (double) damage;
         this.playerHealth = this.playerHealth - (int) damageTaken;
-        
-        
-        
+
     }
 
     public void update(Board gameBoard) {
@@ -521,6 +523,7 @@ public class Player {
         int targetX = 0;
         int targetY = 0;
         char tileASCII = ' ';
+
         if (command[0].equals("u")) {
             if (command[1].length() == 2) {
                 char direction1 = command[1].charAt(0);
@@ -556,22 +559,35 @@ public class Player {
                     targetX = this.playerPositionX - 1;
                 }
 
-                tileASCII = gameBoard.getBoardTile(targetY, targetX);
+                if (gameBoard.getBoardTile(targetY, targetX) == 'P') {
+
+                    for (Potion potion : potions) {
+                        if (potion.getPotionPositionY() == targetY && potion.getPotionPositionX() == targetX) {
+                            potion.applyPotionEffect(this);
+                            potion.setIsUsed(true);
+                            this.playerLastAction = "used the mysterious potion";
+                        }
+                    }
+                } else {
+                    this.playerLastAction = "used nothing.";
+                }
+
+                /*tileASCII = gameBoard.getBoardTile(targetY, targetX);
                 if (tileASCII != 'P') {
                     this.playerLastAction = "used nothing.";
                 } else {
                     for (int i = 0; i < potions.size(); i++) {
                         int posX = potions.get(i).getPotionPositionX();
                         int posY = potions.get(i).getPotionPositionY();
-
+                        System.out.println(posX + " " + posY);
                         if (posX == targetX && posY == targetY) {
-
-                            potions.get(i).setIsUsed();
+                            potions.get(i).setIsUsed(true);
+                            System.out.println("used!");
 
                             this.playerLastAction = "used the mysterious potion";
                         }
                     }
-                }
+                }*/
             }
         }
     }

@@ -31,8 +31,8 @@ public class Potion {
         return this.isUsed;
     }
 
-    public void setIsUsed() {
-        this.isUsed = true;
+    public void setIsUsed(boolean status) {
+        this.isUsed = status;
     }
 
     public String getPotionType() {
