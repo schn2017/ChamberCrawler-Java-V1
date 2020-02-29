@@ -14,6 +14,7 @@ public class Monster {
     private boolean playerFound;
     private char monsterCharacter;
     private boolean isPeaceful;
+    private boolean canMove;
 
     public Monster() {
         this.validMonsterDirections = new boolean[8];
@@ -107,6 +108,10 @@ public class Monster {
 
     }
 
+    public void setCanMove(boolean status) {
+        this.canMove = status;
+    }
+
     public void setMonsterHealth(int monsterHealth) {
         this.monsterHealth = monsterHealth;
     }
@@ -163,7 +168,9 @@ public class Monster {
         if (playerFound == true) {
             attackPlayer(player);
         } else {
-            moveMonster(gameBoard);
+            if (this.canMove == true) {
+                moveMonster(gameBoard);
+            }
         }
     }
 }

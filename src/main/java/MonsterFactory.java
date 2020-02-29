@@ -49,7 +49,7 @@ public class MonsterFactory {
                 monster.setMonsterCharacter('M');
                 monster.setIsPeaceful(player.getMerchantsFriendly());
             }
-
+            monster.setCanMove(true);
             gameBoard.addMonster(monster);
             monster.spawnMonster(gameBoard);
             this.monstersCreated++;
