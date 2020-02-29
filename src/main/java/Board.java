@@ -228,10 +228,21 @@ public class Board {
                 if (this.boardMonsters.get(i).getMonsterCharacter() == 'M') {
                     this.boardTreasures.add(new Treasure(this.boardMonsters.get(i).getMonsterPositionX(), this.boardMonsters.get(i).getMonsterPositionY(), 4, true));
                     setBoardTile(this.boardMonsters.get(i).getMonsterPositionY(), this.boardMonsters.get(i).getMonsterPositionX(), 'G');
+                    player.setMerchantsFriendly(false);
+                    this.boardMonsters.remove(i);
+                    updateMonsters(gameBoard, player);
+                } else {
+                    this.boardMonsters.remove(i);
+                }
+
+            } else { // Monster is alive
+                if (this.boardMonsters.get(i).getMonsterCharacter() == 'M')
+                {
+                    if(player.getMerchantsFriendly() == false){
+                        this.boardMonsters.get(i).setIsPeaceful(false);
+                    }
                 }
                 
-                this.boardMonsters.remove(i);
-            } else { // Monster is alive
                 this.boardMonsters.get(i).update(gameBoard, player);
             }
         }

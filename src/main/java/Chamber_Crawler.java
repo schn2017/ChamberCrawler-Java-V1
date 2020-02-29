@@ -52,7 +52,7 @@ public class Chamber_Crawler {
                 PotionFactory floorPotionCreator = new PotionFactory();
 
                 // Spawn Monsters, Potions, and Treasures
-                floorMonsterCreator.createMonsters(gameBoard);
+                floorMonsterCreator.createMonsters(gameBoard, player);
                 floorTreasureCreator.createTreasures(gameBoard);
                 floorPotionCreator.createPotions(gameBoard);
 

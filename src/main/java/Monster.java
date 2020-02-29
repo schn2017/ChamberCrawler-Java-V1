@@ -135,8 +135,8 @@ public class Monster {
         this.monsterPositionY = monsterPositionY;
     }
 
-    public void setIsPeaceful() {
-        this.isPeaceful = true;
+    public void setIsPeaceful(boolean status) {
+        this.isPeaceful = status;
     }
 
     public void spawnMonster(Board gameBoard) {
@@ -154,6 +154,7 @@ public class Monster {
     public void takeDamage(int damage) {
         double damageTaken = Math.ceil((100 / (100 + (double) this.monsterDefensePower))) * (double) damage;
         this.monsterHealth = this.monsterHealth - (int) damageTaken;
+        this.isPeaceful = false;
     }
 
     public void update(Board gameBoard, Player player) {

@@ -19,6 +19,7 @@ public class Player {
     private int playerAttackPower;
     private int playerDefensePower;
     private boolean playerReset;
+    private boolean merchantsFriendly;
 
     public Player() {
         createPlayer();
@@ -70,6 +71,11 @@ public class Player {
 
                 if (posX == targetXPosition && posY == targetYPosition) {
                     monsters.get(i).takeDamage(this.playerAttackPower);
+                    
+                    if(monsters.get(i).getMonsterCharacter() == 'M'){
+                        this.merchantsFriendly = false;
+                    }
+                    
                     this.playerLastAction = ("dealt " + this.playerAttackPower + " damage to " + monsters.get(i).getMonsterCharacter() + " (" + monsters.get(i).getMonsterHealth() + ").");
                     break;
                 }
@@ -138,6 +144,7 @@ public class Player {
         }
 
         this.playerCharacter = '@';
+        this.merchantsFriendly = true;
         this.playerGold = 0;
         this.validPlayerDirections = new boolean[8];
         for (int i = 0; i < 8; i++) {
@@ -196,6 +203,14 @@ public class Player {
 
     public double getPlayerGold() {
         return this.playerGold;
+    }
+    
+    public boolean getMerchantsFriendly(){
+        return this.merchantsFriendly;
+    }
+    
+    public void setMerchantsFriendly(boolean status){
+        this.merchantsFriendly= status;
     }
 
     public void setPlayerLastAction(String action) {
@@ -483,6 +498,9 @@ public class Player {
     public void takeDamage(int damage) {
         double damageTaken = Math.ceil((100 / (100 + (double) this.playerDefensePower))) * (double) damage;
         this.playerHealth = this.playerHealth - (int) damageTaken;
+        
+        
+        
     }
 
     public void update(Board gameBoard) {

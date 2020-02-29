@@ -5,7 +5,7 @@ public class MonsterFactory {
 
     private int monstersCreated;
 
-    public void createMonsters(Board gameBoard) {
+    public void createMonsters(Board gameBoard, Player player) {
         Random rand = new Random();
 
         while (this.monstersCreated < 20) {
@@ -47,7 +47,7 @@ public class MonsterFactory {
                 monster.setMonsterAttackPower(70);
                 monster.setMonsterDefensePower(5);
                 monster.setMonsterCharacter('M');
-                monster.setIsPeaceful();
+                monster.setIsPeaceful(player.getMerchantsFriendly());
             }
 
             gameBoard.addMonster(monster);
