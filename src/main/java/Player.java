@@ -64,7 +64,7 @@ public class Player {
         } else if (tileASCII == 'P') {
             this.playerLastAction = "missed the potion.";
         } else {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < monsters.size() - 1; i++) {
                 int posX = monsters.get(i).getMonsterPositionX();
                 int posY = monsters.get(i).getMonsterPositionY();
 
@@ -129,10 +129,10 @@ public class Player {
             //negative potions have positive effect
         } else if (optionSelected == 4) {// Orc
             this.playerRace = "Orc";
-            this.playerHealth = 180;
-            this.playerMaxHealth = 180;
-            this.playerAttackPower = 30;
-            this.playerDefensePower = 25;
+            this.playerHealth = 2000;
+            this.playerMaxHealth = 2000;
+            this.playerAttackPower = 300;
+            this.playerDefensePower = 300;
             this.playerGoldModifier = 0.5;
             this.playerPotionModifier = 1;
         }
@@ -367,6 +367,18 @@ public class Player {
             }
             if (looper == 0) {
                 if (oldYPosition != this.playerPositionY || oldXPosition != this.playerPositionX) {
+                    
+                    if (gameBoard.getBoardTile(this.playerPositionY, this.playerPositionX) == 'G'){
+                        ArrayList<Treasure> treasures = gameBoard.getTreasures();
+                        for (Treasure treasure:treasures){
+                            if(treasure.getTreasurePositionY() == this.playerPositionY &&treasure.getTreasurePositionX() == this.playerPositionX ){
+                                treasure.addTreasureToPlayer(this);
+                                System.out.println("Added treasure!");
+                            }
+                        }
+                    }
+                    
+                    
                     gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, this.playerCharacter);
                     gameBoard.setBoardTileOccupied(this.playerPositionY, this.playerPositionX, true);
 

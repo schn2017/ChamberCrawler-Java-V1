@@ -209,12 +209,8 @@ public class Board {
         int treasureListSize = this.boardTreasures.size();
         for (int i = 0; i < treasureListSize - 1; i++) {
             // Check if gold is used
-
             if (this.boardTreasures.get(i).getIsUsed() == true) {
-                this.boardTreasures.get(i).update(gameBoard, player);
                 this.boardTreasures.remove(i);
-            } else {
-                this.boardTreasures.get(i).update(gameBoard, player);
             }
         }
     }
@@ -227,6 +223,13 @@ public class Board {
             if (this.boardMonsters.get(i).getMonsterHealth() <= 0) {
                 setBoardTile(this.boardMonsters.get(i).getMonsterPositionY(), this.boardMonsters.get(i).getMonsterPositionX(), '.');
                 player.setPlayerGold(this.boardMonsters.get(i).getMonsterGold());
+
+                // If merchant died spawn gold hoard
+                if (this.boardMonsters.get(i).getMonsterCharacter() == 'M') {
+                    this.boardTreasures.add(new Treasure(this.boardMonsters.get(i).getMonsterPositionX(), this.boardMonsters.get(i).getMonsterPositionY(), 4, true));
+                    setBoardTile(this.boardMonsters.get(i).getMonsterPositionY(), this.boardMonsters.get(i).getMonsterPositionX(), 'G');
+                }
+                
                 this.boardMonsters.remove(i);
             } else { // Monster is alive
                 this.boardMonsters.get(i).update(gameBoard, player);

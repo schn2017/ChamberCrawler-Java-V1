@@ -15,6 +15,15 @@ public class Treasure {
         this.treasureCharacter = 'G';
     }
 
+    public Treasure(int treasurePositionX, int treasurePositionY, double treasureValue, boolean isValidDirection) {
+        this.treasurePositionX = treasurePositionX;
+        this.treasurePositionY = treasurePositionY;
+        this.treasureCharacter = 'G';
+        this.treasureValue = treasureValue;
+        this.isUsed = false;
+        this.isValidDirection = isValidDirection;
+    }
+
     public int getTreasurePositionX() {
         return this.treasurePositionX;
     }
@@ -32,20 +41,11 @@ public class Treasure {
     }
 
     public void setValidDirection(boolean status) {
-         this.isValidDirection = status;
+        this.isValidDirection = status;
     }
 
     public void setTreasureValue(double treasureValue) {
         this.treasureValue = treasureValue;
-    }
-
-    public void update(Board gameBoard, Player player) {
-        char tileASCII = gameBoard.getBoardTile(this.treasurePositionY, this.treasurePositionX);
-
-        if (tileASCII == '@') {
-            addTreasureToPlayer(player);
-            this.isUsed = true;
-        }
     }
 
     public void spawnTreasure(Board gameBoard) {
@@ -54,7 +54,7 @@ public class Treasure {
 
         this.treasurePositionY = spawnableTiles.get(tileElement).getTilePositionY();
         this.treasurePositionX = spawnableTiles.get(tileElement).getTilePositionX();
-        
+
         gameBoard.setBoardTile(this.treasurePositionY, this.treasurePositionX, this.treasureCharacter);
         gameBoard.setBoardTileOccupied(this.treasurePositionY, this.treasurePositionX, false);
         gameBoard.removeSpawnableTile(tileElement);
@@ -62,6 +62,7 @@ public class Treasure {
 
     public void addTreasureToPlayer(Player player) {
         player.setPlayerGold(this.treasureValue);
+        this.isUsed = true;
     }
 
 }

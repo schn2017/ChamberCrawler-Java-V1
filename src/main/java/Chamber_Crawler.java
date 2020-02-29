@@ -52,14 +52,14 @@ public class Chamber_Crawler {
                 PotionFactory floorPotionCreator = new PotionFactory();
 
                 // Spawn Monsters, Potions, and Treasures
-                //floorMonsterCreator.createMonsters(gameBoard);
-                //floorTreasureCreator.createTreasures(gameBoard);
+                floorMonsterCreator.createMonsters(gameBoard);
+                floorTreasureCreator.createTreasures(gameBoard);
                 floorPotionCreator.createPotions(gameBoard);
 
                 // Set up stairs
                 gameBoard.findSpawnableStairTile(player);
                 Stair stair = new Stair();
-                
+
                 // Spawn stairs
                 stair.spawnStair(gameBoard);
 
@@ -75,9 +75,9 @@ public class Chamber_Crawler {
                     if (stair.checkNextLevel(gameBoard) == true) {
                         break;
                     }
+                    gameBoard.updateMonsters(gameBoard, player);
                     gameBoard.updatePotions(gameBoard, player);
-                    //gameBoard.updateTreasures(gameBoard, player);
-                    //gameBoard.updateMonsters(gameBoard, player);
+                    gameBoard.updateTreasures(gameBoard, player);
                 }
                 floor++;
                 player.resetPlayerStats();
