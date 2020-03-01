@@ -197,8 +197,6 @@ public class Board {
         for (Potion potion : this.boardPotions) {
             if (potion.getIsUsed() == true) {
                 System.out.println("Potion is used");
-
-                setBoardTile(potion.getPotionPositionY(), potion.getPotionPositionX(), '.');
                 this.boardPotions.remove(potion);
                 break;
             }

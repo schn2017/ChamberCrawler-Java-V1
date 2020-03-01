@@ -20,6 +20,7 @@ public class Player {
     private int playerDefensePower;
     private boolean playerReset;
     private boolean merchantsFriendly;
+    private Inventory playerInventory;
 
     public Player() {
         createPlayer();
@@ -142,6 +143,7 @@ public class Player {
         this.playerCharacter = '@';
         this.merchantsFriendly = true;
         this.playerGold = 0;
+        this.playerInventory = new Inventory();
         this.validPlayerDirections = new boolean[8];
         for (int i = 0; i < 8; i++) {
             this.validPlayerDirections[i] = false;
@@ -371,12 +373,15 @@ public class Player {
                 looper = 1;
             } else if (playerAction.charAt(0) == 'u') {
                 String[] command = playerAction.split(" ");
-
                 if (command.length > 1) {
-                    usePotion(gameBoard, playerAction);
-                    looper = 2;
+                    if (command[1].equals("potion") && this.playerInventory.isInventoryEmpty() == true) {
+                        System.out.println("Hello There are no potions to use.");
+                        looper = -1;
+                    } else {
+                        usePotion(gameBoard, playerAction);
+                        looper = 2;
+                    }
                 }
-
             } else {
                 looper = -1;
                 System.out.println("Player action entered is " + playerAction);
@@ -453,6 +458,7 @@ public class Player {
         System.out.println("Race: " + this.playerRace + "   " + "Health: " + this.playerHealth + "    " + "Gold: " + this.playerGold);
         System.out.println("Attack: " + this.playerAttackPower);
         System.out.println("Defensive: " + this.playerDefensePower);
+        System.out.println("Potions in inventory: " + this.playerInventory.getPotions().size());
         System.out.println("Last Round: PC " + this.playerLastAction);
     }
 
@@ -492,7 +498,6 @@ public class Player {
         gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, this.playerCharacter);
         gameBoard.setBoardTileOccupied(this.playerPositionY, this.playerPositionX, true);
         this.playerLastAction = "descended to floor " + this.playerFloor + ".";
-
     }
 
     public void takeDamage(int damage) {
@@ -559,31 +564,27 @@ public class Player {
 
                     for (Potion potion : potions) {
                         if (potion.getPotionPositionY() == targetY && potion.getPotionPositionX() == targetX) {
-                            potion.applyPotionEffect(this);
-                            potion.setIsUsed(true);
-                            this.playerLastAction = "used the mysterious potion";
+                            if (command.length == 2) {
+                                potion.applyPotionEffect(this);
+                                potion.setIsUsed(true);
+                                gameBoard.setBoardTile(potion.getPotionPositionY(), potion.getPotionPositionX(), '.');
+                                this.playerLastAction = "used the mysterious potion.";
+                                break;
+                            } else if (command[2].equals("store")) {
+                                //store potion in inventory
+                                this.playerInventory.addPotion(potion);
+                                this.playerLastAction = "stored the mysterious potion.";
+                                potion.setIsUsed(true);
+                                gameBoard.setBoardTile(potion.getPotionPositionY(), potion.getPotionPositionX(), '.');
+                                break;
+                            }
                         }
                     }
                 } else {
                     this.playerLastAction = "used nothing.";
                 }
-
-                /*tileASCII = gameBoard.getBoardTile(targetY, targetX);
-                if (tileASCII != 'P') {
-                    this.playerLastAction = "used nothing.";
-                } else {
-                    for (int i = 0; i < potions.size(); i++) {
-                        int posX = potions.get(i).getPotionPositionX();
-                        int posY = potions.get(i).getPotionPositionY();
-                        System.out.println(posX + " " + posY);
-                        if (posX == targetX && posY == targetY) {
-                            potions.get(i).setIsUsed(true);
-                            System.out.println("used!");
-
-                            this.playerLastAction = "used the mysterious potion";
-                        }
-                    }
-                }*/
+            } else if (command[1].equals("potion")) {
+                this.playerInventory.usePotion(this);
             }
         }
     }

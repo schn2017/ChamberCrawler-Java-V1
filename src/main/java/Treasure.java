@@ -64,5 +64,4 @@ public class Treasure {
         player.setPlayerGold(this.treasureValue);
         this.isUsed = true;
     }
-
 }

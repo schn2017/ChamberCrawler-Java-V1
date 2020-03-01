@@ -6,6 +6,7 @@ public class Victory {
 
     public void displayVictory(Player player) {
         int rowCount = 0;
+        System.out.println("");
         try ( Scanner scanner = new Scanner(Paths.get("victoryScreen.txt"))) {
             while (scanner.hasNextLine()) {
                 String row = scanner.nextLine();

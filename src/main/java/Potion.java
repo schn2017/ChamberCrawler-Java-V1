@@ -56,6 +56,10 @@ public class Potion {
     public void setModifier(int potionModifier) {
         this.potionModifier = potionModifier;
     }
+    
+    public int getModifier(){
+        return this.potionModifier;
+    }
 
     public int getPotionPositionX() {
         return this.potionPositionX;
