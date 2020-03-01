@@ -14,14 +14,17 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
   
 # Map
 
-# Beastiary
-1. D - (Dragon)
-2. M - (Merchant)
-3. N - (Goblin)
-4. T - (Troll)
-5. V - (Vampire)
-6. W - (Werewolf)
-7. X - (Phoenix)
+# Symbols/Character Representations
+* @ - Player
+* G - Gold
+* P - Potion
+* D - (Dragon)
+* M - (Merchant)
+* N - (Goblin)
+* T - (Troll)
+* V - (Vampire)
+* W - (Werewolf)
+* X - (Phoenix)
 
 # Future Improvements
 I plan to due some major refactoring to take advantage of inheritance. For example player class and monster class could both be subclasses of class called "Entity". This Entity class would contain all similar methods (e.g. findValidDirections and takeDamager) and member variables (e.g. monsterPositionX and playerPositionX).
