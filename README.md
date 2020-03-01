@@ -2,6 +2,8 @@
 
 This project was inspired by the adventure mode in Dwarf Fortress and other dungeon crawler roguelikes. I have always wanted to create my own ASCII roguelike dungeon crawler. I finally decided to try making one myself after I came across a list of programming projects. I decided to work on this project alongside a java course I am taking.
 
+![Opening Screen](https://i.imgur.com/15ruLsC.png)
+
 # Valid Player Commands
 * no, so, ea, we, ne, nw, se, sw: moves the player character one block in the appropriate cardinal direction
 * u <direction>: uses the potion indicated by the direction (e.g. no, so, ea
@@ -20,7 +22,7 @@ Example of Game Map below. <br>
 ![Game Map](https://i.imgur.com/PGTNKYx.png)
 
 Example of field of view below.
-![FOV](https://i.imgur.com/hGCr8D1.png)
+![FOV](https://i.imgur.com/mmCUvKz.png)
 
 Example of player using map below. The player's map only displays the tiles but not the location of gold, monsters or potions.
 ![MAP](https://i.imgur.com/GiV2BAt.png)
