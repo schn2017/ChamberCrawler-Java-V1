@@ -9,6 +9,7 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 * u potion: uses a potion stored in the player's inventory
 * a <direction>: attacks the enemy in the specified direction, if the monster is in the immediately specified block e.g. must be one block north of the @ 
 * help: displays all possible commands
+* map: displays all discovered tiles in the dungeon
 * reset: restarts the game 
 * quit: exits the game
 
