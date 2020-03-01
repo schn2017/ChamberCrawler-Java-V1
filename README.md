@@ -14,7 +14,16 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 * quit: exits the game
 
 # Map
+There are ten floors in the dungeon. Each floor has a randomly spawned staircase that allows the player to descend to the next floor of the dungeon. Each floor randomly spawns, monsters, potions, and gold. Note: all floor levels share the same floor layout. Field of the view of the player is limited, so the player will need to explore on their own.
+
+Example of Game Map below. <br>
 ![Game Map](https://i.imgur.com/PGTNKYx.png)
+
+Example of field of view below.
+![FOV](https://i.imgur.com/hGCr8D1.png)
+
+Example of player using map below. The player's map only displays the tiles but not monsters location, gold, or potions.
+![MAP](https://i.imgur.com/GiV2BAt.png)
 
 # Symbols/Character Representations
 * @ - Player
