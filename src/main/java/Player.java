@@ -306,7 +306,6 @@ public class Player {
                     this.playerPositionX = this.playerPositionX + 1;
                     this.playerLastAction = "moved north east.";
                     looper = 0;
-
                 }
             } else if (playerAction.equals("nw")) {
                 if (validPlayerDirections[2] == true) {
