@@ -11,9 +11,6 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 * help: displays all possible commands
 * reset: restarts the game 
 * quit: exits the game
-  
-# Map
-
 
 # Symbols/Character Representations
 * @ - Player
