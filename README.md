@@ -22,7 +22,7 @@ Example of Game Map below. <br>
 Example of field of view below.
 ![FOV](https://i.imgur.com/hGCr8D1.png)
 
-Example of player using map below. The player's map only displays the tiles but not monsters location, gold, or potions.
+Example of player using map below. The player's map only displays the tiles but not the location of gold, monsters or potions.
 ![MAP](https://i.imgur.com/GiV2BAt.png)
 
 # Symbols/Character Representations
