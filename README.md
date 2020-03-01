@@ -8,7 +8,7 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 * u <direction> store: stores the potion indicated by the direction (e.g. no, so, ea) in the player's inventory
 * u potion: uses a potion stored in the player's inventory
 * a <direction>: attacks the enemy in the specified direction, if the monster is in the immediately specified block e.g. must be one block north of the @ 
-* help: displays all possible commands" 
+* help: displays all possible commands
 * reset: restarts the game 
 * quit: exits the game
   
