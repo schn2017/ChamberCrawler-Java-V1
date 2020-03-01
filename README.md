@@ -44,8 +44,9 @@ Example of player using map below. The player's map only displays the tiles but 
 ### Dungeon Floor
 * <div>+ - Door</div>
 * <div># - Passage way</div>
-* <div>-, | - Walls</div>
-* <div>/ - Stairs</div>
+* <div>| - Vertical wall</div>
+* <div>- - Horizontal wall</div>
+* <div>/ - Staircase</div>
 
 # Future Improvements
 I plan to due some major refactoring to take advantage of inheritance. For example player class and monster class could both be subclasses of class called "Entity". This Entity class would contain all similar methods (e.g. findValidDirections and takeDamager) and member variables (e.g. monsterPositionX and playerPositionX). The only class that inherits is the dragon class which inherits from the monster class. If other monsters had unique abilities I would give them their own classes as well.
