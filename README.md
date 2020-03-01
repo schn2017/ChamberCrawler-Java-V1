@@ -4,6 +4,11 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 
 ![Opening Screen](https://i.imgur.com/15ruLsC.png)
 
+# Game Objective
+The object of Chamber Crawler is to get to level 10 of the dungeon with as much gold as possible. Killing monsters will yeild experience points. Once enough experience points are acquired the player levels up and gains permanent bonuses to their health, attack power, and defense. The player can also pick up and use potions but any boosts given through the potions will expire once descending to the next floor.
+
+The game ends once the player hits the tenth floor of the dungeon.
+
 # Valid Player Commands
 * no, so, ea, we, ne, nw, se, sw: moves the player character one block in the appropriate cardinal direction
 * u <direction>: uses the potion indicated by the direction (e.g. no, so, ea
@@ -14,9 +19,6 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 * map: displays all discovered tiles in the dungeon
 * reset: restarts the game 
 * quit: exits the game
-
-# Game Objective
-The object of Chamber Crawler is to get to level 10 of the dungeon with as much gold as possible. Killing monsters will yeild experience points. Once enough experience points are acquired the player levels up and gains permanent bonuses to their health, attack power, and defense. The player can also pick up and use potions but any boosts given through the potions will expire once descending to the next floor.
 
 # Map
 There are ten floors in the dungeon. Each floor has a randomly spawned staircase that allows the player to descend to the next floor of the dungeon. Each floor randomly spawns, monsters, potions, and gold. Note: all floor levels share the same floor layout. Field of the view of the player is limited, so the player will need to explore on their own.
