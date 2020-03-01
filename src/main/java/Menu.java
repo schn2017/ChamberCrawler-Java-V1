@@ -43,11 +43,19 @@ public class Menu {
                 System.out.println("Invalid option entered!");
             }
         }
-
     }
 
     public void displayHelp() {
-        System.out.println("Display Help: To do");
+        System.out.println("no,so,ea,we,ne,nw,se,sw: moves the player character one block in the appropriate cardinal direction");
+        System.out.println("u <direction>: uses the potion indicated by the direction (e.g. no, so, ea)");
+        System.out.println("u <direction> store: stores the potion indicated by the direction (e.g. no, so, ea) in the player's inventory");
+        System.out.println("u potion: uses a potion stored in the player's inventory");
+        System.out.println("a <direction>: attacks the enemy in the specified direction, if the monster is in the immediately specified block");
+        System.out.println("(e.g. must be one block north of the @");
+        System.out.println("map: displays all discovered tiles in the dungeon");
+        System.out.println("help: displays all possible commands");
+        System.out.println("reset: restarts the game");
+        System.out.println("quit: exits the game");
     }
 
 }

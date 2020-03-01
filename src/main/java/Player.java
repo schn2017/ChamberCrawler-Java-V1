@@ -142,21 +142,12 @@ public class Player {
             //negative potions have positive effect
         } else if (optionSelected == 4) {// Orc
             this.playerRace = "Orc";
-            this.playerHealth = 2000;
-            this.playerMaxHealth = 2000;
-            this.playerAttackPower = 300;
-            this.playerDefensePower = 300;
-            this.playerAttackPowerBase = 300;
-            this.playerDefensePowerBase = 300;
-
-            /*
             this.playerHealth = 180;
             this.playerMaxHealth = 180;
             this.playerAttackPower = 30;
-            this.playerDefensePower = 25;          
+            this.playerDefensePower = 25;
             this.playerAttackPowerBase = 30;
             this.playerDefensePowerBase = 25;
-             */
             this.playerGoldModifier = 0.5;
             this.playerPotionModifier = 1;
         }
@@ -204,6 +195,19 @@ public class Player {
 
     public void addExperience() {
         this.playerExperience++;
+    }
+
+    public void displayHelp() {
+        System.out.println("no,so,ea,we,ne,nw,se,sw: moves the player character one block in the appropriate cardinal direction");
+        System.out.println("u <direction>: uses the potion indicated by the direction (e.g. no, so, ea)");
+        System.out.println("u <direction> store: stores the potion indicated by the direction (e.g. no, so, ea) in the player's inventory");
+        System.out.println("u potion: uses a potion stored in the player's inventory");
+        System.out.println("a <direction>: attacks the enemy in the specified direction, if the monster is in the immediately specified block");
+        System.out.println("(e.g. must be one block north of the @");
+        System.out.println("help: displays all possible commands");
+        System.out.println("map: displays all discovered tiles in the dungeon");
+        System.out.println("reset: restarts the game");
+        System.out.println("quit: exits the game");
     }
 
     public int getPlayerPositionX() {
@@ -334,6 +338,9 @@ public class Player {
             } else if (playerAction.equals("reset")) {
                 this.playerReset = true;
                 looper = 0;
+            } else if (playerAction.equals("help")) {
+                displayHelp();
+                looper = -1;
             } else if (playerAction.equals("map")) {
                 gameBoard.drawMap();
                 looper = -1;
