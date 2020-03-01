@@ -49,6 +49,8 @@ Example of player using map below. The player's map only displays the tiles but 
 * <div>/ - Staircase</div>
 
 # Future Improvements
-I plan to due some major refactoring to take advantage of inheritance. For example player class and monster class could both be subclasses of class called "Entity". This Entity class would contain all similar methods (e.g. findValidDirections and takeDamager) and member variables (e.g. monsterPositionX and playerPositionX). The only class that inherits is the dragon class which inherits from the monster class. If other monsters had unique abilities I would give them their own classes as well.
+I plan to due some major refactoring to take advantage of inheritance. For example player class and monster class could both be subclasses of class called "Entity". This Entity class would contain all similar methods (e.g. findValidDirections and takeDamage) and member variables (e.g. monsterPositionX and playerPositionX). The only class that inherits is the dragon class which inherits from the monster class. If other monsters had unique abilities I would give them their own classes as well.
 
 The lack of inheritance was due to not learning about inheritance until I accidentally stumbled accross it while browsing online. As of 3/01/2020, the course has not gotten to inheritance yet in the lessons.
+
+Additional, I would to add a method to create randonly sized chambers in random locations of each floor instead of using the same floor layout for each floor.
