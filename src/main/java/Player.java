@@ -373,45 +373,61 @@ public class Player {
                 looper = 1;
             } else if (playerAction.charAt(0) == 'u') {
                 String[] command = playerAction.split(" ");
+                String[] validEntries = {"no", "ne", "nw", "ea", "se", "so", "sw", "we"};
                 if (command.length > 1) {
                     if (command[1].equals("potion") && this.playerInventory.isInventoryEmpty() == true) {
-                        System.out.println("Hello There are no potions to use.");
+                        System.out.println("There are no potions to use.");
                         looper = -1;
                     } else {
-                        usePotion(gameBoard, playerAction);
-                        looper = 2;
-                    }
-                }
-            } else {
-                looper = -1;
-                System.out.println("Player action entered is " + playerAction);
-            }
-            if (looper == 0) {
-                if (oldYPosition != this.playerPositionY || oldXPosition != this.playerPositionX) {
+                        for (int i = 0; i < 8; i++) {
+                            if (validEntries[i].equals(command[1])) {
 
-                    if (gameBoard.getBoardTile(this.playerPositionY, this.playerPositionX) == 'G') {
-                        ArrayList<Treasure> treasures = gameBoard.getTreasures();
-                        for (Treasure treasure : treasures) {
-                            if (treasure.getTreasurePositionY() == this.playerPositionY && treasure.getTreasurePositionX() == this.playerPositionX) {
-                                treasure.addTreasureToPlayer(this);
-                                System.out.println("Added treasure!");
+                                if (this.playerInventory.isInventoryEmpty() == true) {
+                                    System.out.println("There are no potions to use.");
+                                    looper = -1;
+                                    break;
+                                } else {
+                                    usePotion(gameBoard, playerAction);
+                                    looper = 2;
+                                    break;
+                                }
+                            } else {
+                                looper = -1;
                             }
                         }
                     }
+                } else {
+                    looper = -1;
+                    System.out.println("Player action entered is " + playerAction);
+                }
+                if (looper == 0) {
+                    if (oldYPosition != this.playerPositionY || oldXPosition != this.playerPositionX) {
 
-                    gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, this.playerCharacter);
-                    gameBoard.setBoardTileOccupied(this.playerPositionY, this.playerPositionX, true);
+                        if (gameBoard.getBoardTile(this.playerPositionY, this.playerPositionX) == 'G') {
+                            ArrayList<Treasure> treasures = gameBoard.getTreasures();
+                            for (Treasure treasure : treasures) {
+                                if (treasure.getTreasurePositionY() == this.playerPositionY && treasure.getTreasurePositionX() == this.playerPositionX) {
+                                    treasure.addTreasureToPlayer(this);
+                                    System.out.println("Added treasure!");
+                                }
+                            }
+                        }
 
-                    char character = gameBoard.getBoardOriginalTile(oldYPosition, oldXPosition);
+                        gameBoard.setBoardTile(this.playerPositionY, this.playerPositionX, this.playerCharacter);
+                        gameBoard.setBoardTileOccupied(this.playerPositionY, this.playerPositionX, true);
 
-                    gameBoard.setBoardTile(oldYPosition, oldXPosition, character);
-                    gameBoard.setBoardTileOccupied(oldYPosition, oldXPosition, false);
+                        char character = gameBoard.getBoardOriginalTile(oldYPosition, oldXPosition);
+
+                        gameBoard.setBoardTile(oldYPosition, oldXPosition, character);
+                        gameBoard.setBoardTileOccupied(oldYPosition, oldXPosition, false);
+                    }
+                }
+
+                for (int i = 0; i < 8; i++) {
+                    this.validPlayerDirections[i] = false;
                 }
             }
 
-            for (int i = 0; i < 8; i++) {
-                this.validPlayerDirections[i] = false;
-            }
         }
 
     }
