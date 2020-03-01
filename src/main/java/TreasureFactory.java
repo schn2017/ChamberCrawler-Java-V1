@@ -33,7 +33,6 @@ public class TreasureFactory {
                 dragon.findSpawnLocation(gameBoard);
                 dragon.spawnMonster(gameBoard, dragon.getMonsterPositionY(), dragon.getMonsterPositionX());
                 gameBoard.addMonster(dragon);
-
                 dragonCreated = false;
             }
 

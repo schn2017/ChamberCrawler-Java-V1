@@ -141,7 +141,6 @@ public class Monster {
     }
 
     public void setMonsterPositionY(int positionY) {
-        System.out.println(positionY);
         this.monsterPositionY = positionY;
     }
 

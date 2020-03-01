@@ -17,10 +17,14 @@ public class Player {
     private char playerCharacter;
     private String playerLastAction;
     private int playerAttackPower;
+    private int playerDefensePowerBase;
+    private int playerAttackPowerBase;
     private int playerDefensePower;
     private boolean playerReset;
     private boolean merchantsFriendly;
     private Inventory playerInventory;
+    private int playerLevel;
+    private int playerExperience;
 
     public Player() {
         createPlayer();
@@ -110,6 +114,8 @@ public class Player {
             this.playerMaxHealth = 140;
             this.playerAttackPower = 20;
             this.playerDefensePower = 20;
+            this.playerAttackPowerBase = 20;
+            this.playerDefensePowerBase = 20;
             this.playerGoldModifier = 1;
             this.playerPotionModifier = 1;
 
@@ -119,6 +125,8 @@ public class Player {
             this.playerMaxHealth = 100;
             this.playerAttackPower = 20;
             this.playerDefensePower = 30;
+            this.playerAttackPowerBase = 20;
+            this.playerDefensePowerBase = 30;
             this.playerGoldModifier = 2;
             this.playerPotionModifier = 1;
         } else if (optionSelected == 3) {// Elf
@@ -127,6 +135,8 @@ public class Player {
             this.playerMaxHealth = 140;
             this.playerAttackPower = 30;
             this.playerDefensePower = 10;
+            this.playerAttackPowerBase = 30;
+            this.playerDefensePowerBase = 10;
             this.playerGoldModifier = 1;
             this.playerPotionModifier = -1;
             //negative potions have positive effect
@@ -136,13 +146,26 @@ public class Player {
             this.playerMaxHealth = 2000;
             this.playerAttackPower = 300;
             this.playerDefensePower = 300;
+            this.playerAttackPowerBase = 300;
+            this.playerDefensePowerBase = 300;
+
+            /*
+            this.playerHealth = 180;
+            this.playerMaxHealth = 180;
+            this.playerAttackPower = 30;
+            this.playerDefensePower = 25;          
+            this.playerAttackPowerBase = 30;
+            this.playerDefensePowerBase = 25;
+             */
             this.playerGoldModifier = 0.5;
             this.playerPotionModifier = 1;
         }
 
         this.playerCharacter = '@';
         this.merchantsFriendly = true;
+        this.playerExperience = 0;
         this.playerGold = 0;
+        this.playerLevel = 1;
         this.playerInventory = new Inventory();
         this.validPlayerDirections = new boolean[8];
         for (int i = 0; i < 8; i++) {
@@ -179,6 +202,10 @@ public class Player {
         }
     }
 
+    public void addExperience() {
+        this.playerExperience++;
+    }
+
     public int getPlayerPositionX() {
         return this.playerPositionX;
     }
@@ -207,6 +234,19 @@ public class Player {
         return this.merchantsFriendly;
     }
 
+    public void levelUp() {
+        if (this.playerExperience == 10) {
+            this.playerAttackPower = this.playerAttackPower + 5;
+            this.playerAttackPowerBase = this.playerAttackPowerBase + 5;
+            this.playerDefensePower = this.playerDefensePower + 5;
+            this.playerDefensePowerBase = this.playerDefensePowerBase + 5;
+            this.playerMaxHealth = this.playerMaxHealth + 5;
+            this.playerHealth = this.playerHealth + 5;
+            this.playerExperience = 0;
+            this.playerLevel++;
+        }
+    }
+
     public void setMerchantsFriendly(boolean status) {
         this.merchantsFriendly = status;
     }
@@ -217,7 +257,7 @@ public class Player {
 
     public void setPlayerGold(double gold) {
         //System.out.println(gold);
-        this.playerGold = this.playerGold + gold;
+        this.playerGold = this.playerGold + (gold * this.playerGoldModifier);
         //System.out.println(this.playerGold);
     }
 
@@ -374,25 +414,21 @@ public class Player {
                 String[] command = playerAction.split(" ");
                 String[] validEntries = {"no", "ne", "nw", "ea", "se", "so", "sw", "we"};
                 if (command.length > 1) {
-                    if (command[1].equals("potion") && this.playerInventory.isInventoryEmpty() == true) {
-                        System.out.println("There are no potions to use.");
-                        looper = -1;
-                    } else {
-                        for (int i = 0; i < 8; i++) {
-                            if (validEntries[i].equals(command[1])) {
-
-                                if (this.playerInventory.isInventoryEmpty() == true) {
-                                    System.out.println("There are no potions to use.");
-                                    looper = -1;
-                                    break;
-                                } else {
-                                    usePotion(gameBoard, playerAction);
-                                    looper = 2;
-                                    break;
-                                }
-                            } else {
-                                looper = -1;
-                            }
+                    for (int i = 0; i < 8; i++) {
+                        if (validEntries[i].equals(command[1])) {
+                            usePotion(gameBoard, playerAction);
+                            looper = 2;
+                            break;
+                        } else if (command[1].equals("potion") && this.playerInventory.isInventoryEmpty() == false) {
+                            usePotion(gameBoard, playerAction);
+                            looper = 2;
+                            break;
+                        } else if (command[1].equals("potion") && this.playerInventory.isInventoryEmpty() == true) {
+                            System.out.println("There are no potions to use.");
+                            looper = -1;
+                            break;
+                        } else {
+                            looper = -1;
                         }
                     }
                 }
@@ -402,13 +438,11 @@ public class Player {
             }
             if (looper == 0) {
                 if (oldYPosition != this.playerPositionY || oldXPosition != this.playerPositionX) {
-
                     if (gameBoard.getBoardTile(this.playerPositionY, this.playerPositionX) == 'G') {
                         ArrayList<Treasure> treasures = gameBoard.getTreasures();
                         for (Treasure treasure : treasures) {
                             if (treasure.getTreasurePositionY() == this.playerPositionY && treasure.getTreasurePositionX() == this.playerPositionX) {
                                 treasure.addTreasureToPlayer(this);
-                                System.out.println("Added treasure!");
                             }
                         }
                     }
@@ -422,7 +456,6 @@ public class Player {
                     gameBoard.setBoardTileOccupied(oldYPosition, oldXPosition, false);
                 }
             }
-
             for (int i = 0; i < 8; i++) {
                 this.validPlayerDirections[i] = false;
             }
@@ -469,6 +502,7 @@ public class Player {
     public void printPlayerInformation() {
         System.out.println("Floor: " + this.playerFloor);
         System.out.println("Race: " + this.playerRace + "   " + "Health: " + this.playerHealth + "    " + "Gold: " + this.playerGold);
+        System.out.println("Level: " + this.playerLevel + "   Experience: " + this.playerExperience + "/10");
         System.out.println("Attack: " + this.playerAttackPower);
         System.out.println("Defensive: " + this.playerDefensePower);
         System.out.println("Potions in inventory: " + this.playerInventory.getPotions().size());
@@ -476,21 +510,8 @@ public class Player {
     }
 
     public void resetPlayerStats() {
-
-        if (this.playerRace.equals("Human")) {// Human
-            this.playerAttackPower = 20;
-            this.playerDefensePower = 20;
-        } else if (this.playerRace.equals("Dwarf")) {// Dwarf
-            this.playerAttackPower = 20;
-            this.playerDefensePower = 30;
-        } else if (this.playerRace.equals("Elf")) {// Elf
-            this.playerAttackPower = 30;
-            this.playerDefensePower = 10;
-            //negative potions have positive effect
-        } else if (this.playerRace.equals("Orc")) {// Orc
-            this.playerAttackPower = 30;
-            this.playerDefensePower = 25;
-        }
+        this.playerAttackPower = this.playerAttackPowerBase;
+        this.playerDefensePower = this.playerDefensePowerBase;
     }
 
     public void spawnPlayer(Board gameBoard) {
@@ -516,10 +537,10 @@ public class Player {
     public void takeDamage(int damage) {
         double damageTaken = Math.ceil((100 / (100 + (double) this.playerDefensePower))) * (double) damage;
         this.playerHealth = this.playerHealth - (int) damageTaken;
-
     }
 
     public void update(Board gameBoard) {
+        levelUp();
         printPlayerInformation();
         findValidDirections(gameBoard);
         printValidDirections();
@@ -574,7 +595,6 @@ public class Player {
                 }
 
                 if (gameBoard.getBoardTile(targetY, targetX) == 'P') {
-
                     for (Potion potion : potions) {
                         if (potion.getPotionPositionY() == targetY && potion.getPotionPositionX() == targetX) {
                             if (command.length == 2) {

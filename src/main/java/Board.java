@@ -66,7 +66,7 @@ public class Board {
                 }
                 rowCount++;
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -190,13 +190,11 @@ public class Board {
                 }
             }
         }
-
     }
 
     public void updatePotions(Board gameBoard, Player player) {
         for (Potion potion : this.boardPotions) {
             if (potion.getIsUsed() == true) {
-                System.out.println("Potion is used");
                 this.boardPotions.remove(potion);
                 break;
             }
@@ -219,13 +217,12 @@ public class Board {
     public void updateMonsters(Board gameBoard, Player player) {
         ArrayList<Monster> deadMonsters = new ArrayList<>();
         for (Monster monster : this.boardMonsters) {
-
+            
             // Check if monster is dead
             if (monster.getMonsterHealth() <= 0) {
-                if(monster.getMonsterCharacter() == 'D'){
+                if (monster.getMonsterCharacter() == 'D') {
                     monster.update(gameBoard, player);
                 }
-                
                 deadMonsters.add(monster);
             } else { // Monster is alive'
                 if (monster.getMonsterCharacter() == 'M') {
@@ -240,6 +237,7 @@ public class Board {
         for (Monster monster : deadMonsters) {
             setBoardTile(monster.getMonsterPositionY(), monster.getMonsterPositionX(), '.');
             player.setPlayerGold(monster.getMonsterGold());
+            player.addExperience();
 
             // If merchant died spawn gold hoard
             if (monster.getMonsterCharacter() == 'M') {
@@ -248,6 +246,5 @@ public class Board {
             }
             this.boardMonsters.remove(monster);
         }
-
     }
 }
