@@ -14,6 +14,7 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
   
 # Map
 
+
 # Symbols/Character Representations
 * @ - Player
 * G - Gold
