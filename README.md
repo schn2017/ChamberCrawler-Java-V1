@@ -3,7 +3,7 @@
 This project was inspired by the adventure mode in Dwarf Fortress and other dungeon crawler roguelikes. I have always wanted to create my own ASCII roguelike dungeon crawler. I finally decided to try making one myself after I came across a list of projects related to object oriented programming.
 
 # Valid Player Commands
-* no,so,ea,we,ne,nw,se,sw: moves the player character one block in the appropriate cardinal direction
+* no, so, ea, we, ne, nw, se, sw: moves the player character one block in the appropriate cardinal direction
 * u <direction>: uses the potion indicated by the direction (e.g. no, so, ea
 * u <direction> store: stores the potion indicated by the direction (e.g. no, so, ea) in the player's inventory
 * u potion: uses a potion stored in the player's inventory
