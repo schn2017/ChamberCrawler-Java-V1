@@ -1,6 +1,6 @@
 # ChamberCrawler-Java-V1
 
-This project was inspired by the adventure mode in Dwarf Fortress and other dungeon crawler roguelikes. I have always wanted to create my own ASCII roguelike dungeon crawler. I finally decided to try making one myself after I came across a list of programming projects. I decided to work on this project alongside a java course I am taking.
+This project was inspired by the adventure mode in Dwarf Fortress and other dungeon crawler roguelikes. I have always wanted to create my own ASCII roguelike dungeon crawler. I finally decided to try making one myself after I came across a list of programming projects. I decided to work on this project alongside a java course.
 
 ![Opening Screen](https://i.imgur.com/15ruLsC.png)
 
