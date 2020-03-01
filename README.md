@@ -1,6 +1,6 @@
 # ChamberCrawler-Java-V1
 
-This project was inspired by the adventure mode in Dwarf Fortress and other dungeon crawler roguelikes. I have always wanted to create my own ASCII roguelike dungeon crawler. I finally decided to try making one myself after I came across a list of projects related to object oriented programming.
+This project was inspired by the adventure mode in Dwarf Fortress and other dungeon crawler roguelikes. I have always wanted to create my own ASCII roguelike dungeon crawler. I finally decided to try making one myself after I came across a list of programming projects. I decided to work on this project alongside a java course I am taking.
 
 # Valid Player Commands
 * no, so, ea, we, ne, nw, se, sw: moves the player character one block in the appropriate cardinal direction
@@ -27,4 +27,6 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 * X - (Phoenix)
 
 # Future Improvements
-I plan to due some major refactoring to take advantage of inheritance. For example player class and monster class could both be subclasses of class called "Entity". This Entity class would contain all similar methods (e.g. findValidDirections and takeDamager) and member variables (e.g. monsterPositionX and playerPositionX).
+I plan to due some major refactoring to take advantage of inheritance. For example player class and monster class could both be subclasses of class called "Entity". This Entity class would contain all similar methods (e.g. findValidDirections and takeDamager) and member variables (e.g. monsterPositionX and playerPositionX). The only class that inherits is the dragon class which inherits from the monster class. If other monsters had unique abilities I would give them their own classes as well.
+
+The lack of inheritance was due to not learning about inheritance until I accidentally stumbled accross it while browsing online. As of 3/01/2020, the course has not gotten to inheritance yet in the lessons.
