@@ -13,7 +13,7 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 * quit: exits the game
 
 # Map
-![Image description](https://imgur.com/a/IkjXSSe)
+![Image description](https://imgur.com/a/8gEgb5l)
 
 # Symbols/Character Representations
 * @ - Player
