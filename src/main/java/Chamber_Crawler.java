@@ -65,7 +65,7 @@ public class Chamber_Crawler {
 
                 //Active Floor Loop
                 while (true) {
-                    gameBoard.drawBoard();
+                    gameBoard.drawBoard(player);
                     player.update(gameBoard);
 
                     if (player.getPlayerReset() == true) {

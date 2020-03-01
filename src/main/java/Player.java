@@ -334,6 +334,9 @@ public class Player {
             } else if (playerAction.equals("reset")) {
                 this.playerReset = true;
                 looper = 0;
+            } else if (playerAction.equals("map")) {
+                gameBoard.drawMap();
+                looper = -1;
             } else if (playerAction.equals("no")) {
                 if (validPlayerDirections[0] == true) {
                     this.playerPositionY = this.playerPositionY - 1;

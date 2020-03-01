@@ -66,21 +66,43 @@ public class Board {
                 }
                 rowCount++;
             }
-            
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    public void drawBoard() {
+    public void drawBoard(Player player) {
         for (int i = 0; i < this.boardSizeY; i++) {
             for (int j = 0; j < this.boardSizeX; j++) {
-                System.out.print(this.boardTiles[i][j].getTileCharacter());
+                this.boardTiles[i][j].getDistanceFromPlayer(player);
+                if (this.boardTiles[i][j].getIsSeeable() == false) {
+                    System.out.print(" ");
+                } else {
+                    System.out.print(this.boardTiles[i][j].getTileCharacter());
+                }
             }
             System.out.println("");
         }
     }
-
+    
+    public void drawMap(){
+                for (int i = 0; i < this.boardSizeY; i++) {
+            for (int j = 0; j < this.boardSizeX; j++) {
+                if (this.boardTiles[i][j].getIsDiscovered() == false) {
+                    System.out.print(" ");
+                } else {
+                    if (this.boardTiles[i][j].getTileCharacter() == '@'){
+                        System.out.print("@");
+                    }
+                    
+                    System.out.print(this.boardTiles[i][j].getOriginalCharacter());
+                }
+            }
+            System.out.println("");
+        }
+    }
+    
     public void setBoardTile(int row, int column, char character) {
         this.boardTiles[row][column].setTileCharacter(character);
     }
@@ -217,7 +239,7 @@ public class Board {
     public void updateMonsters(Board gameBoard, Player player) {
         ArrayList<Monster> deadMonsters = new ArrayList<>();
         for (Monster monster : this.boardMonsters) {
-            
+
             // Check if monster is dead
             if (monster.getMonsterHealth() <= 0) {
                 if (monster.getMonsterCharacter() == 'D') {
