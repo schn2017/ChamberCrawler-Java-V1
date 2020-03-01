@@ -22,3 +22,6 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 5. V - (Vampire)
 6. W - (Werewolf)
 7. X - (Phoenix)
+
+# Future Improvements
+I plan to due some major refactoring to take advantage of inheritance. For example player class and monster class could both be subclasses of class called "Entity". This Entity class would contain all similar methods and member variables (e.g. monsterPositionX and playerPositionX).
