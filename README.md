@@ -12,6 +12,9 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 * reset: restarts the game 
 * quit: exits the game
 
+# Map
+![Image description](https://imgur.com/a/IkjXSSe)
+
 # Symbols/Character Representations
 * @ - Player
 * G - Gold
