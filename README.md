@@ -5,7 +5,7 @@ This project was inspired by the adventure mode in Dwarf Fortress and other dung
 ![Opening Screen](https://i.imgur.com/15ruLsC.png)
 
 # Game Objective
-The object of Chamber Crawler is to get to the tenth floor of the dungeon with as much gold as possible. Killing monsters will yeild experience points. Once enough experience points are acquired the player levels up and gains permanent bonuses to their health, attack power, and defense. The player can also pick up and use potions but any boosts given through the potions will expire once descending to the next floor.
+The object of Chamber Crawler is to get to the tenth floor of the dungeon with as much gold as possible. Killing monsters will yield experience points. Once enough experience points are acquired the player levels up and gains permanent bonuses to their health, attack power, and defense. The player can also pick up and use potions but any boosts given through the potions will expire once descending to the next floor.
 
 The game ends once the player hits the tenth floor of the dungeon.
 
