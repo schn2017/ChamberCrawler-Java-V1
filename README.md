@@ -61,7 +61,7 @@ I plan to due some major refactoring to take advantage of inheritance. For examp
 The lack of inheritance was due to not learning about inheritance until I accidentally stumbled accross it while browsing online. As of 3/01/2020, the course has not gotten to inheritance yet in the lessons.
 
 ### Unique rooms per floor
-I would to add a method to create randonly sized chambers in random locations of each floor instead of using the same floor layout for each floor.
+I would to add a method to create randomly sized chambers in random locations of each floor instead of using the same floor layout for each floor.
 
 ### Leaderboard
 Adding a leaderboard will make the game more competitive and allow local players to compare scores.
